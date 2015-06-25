@@ -82,7 +82,8 @@ public class MainMenu {
 	public static void WriteToFile() {
 		try {
 			String content = "this is the content";
-			File file = new File("/users/lczornyj/workspace/Lee-Cz-Ims");
+			String Filename = "testing";
+			File file = new File("C:\\users\\lczornyj\\workspace\\Lee-Cz-Ims\\" +Filename );
 			if (!file.exists() ) {
 				file.createNewFile();
 			}
