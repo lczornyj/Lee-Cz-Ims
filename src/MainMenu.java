@@ -80,10 +80,16 @@ public class MainMenu {
 		}
 	}
 	public static void WriteToFile() {
+		System.out.print("Enter the files location: ");
+		Scanner in = new Scanner(System.in);
+		String fileLocation = in.nextLine().trim();
+		System.out.print("What is the files name? ");
+		Scanner user = new Scanner(System.in);
+		String nameOfFile = user.nextLine();
 		try {
 			String content = "this is the content";
-			String Filename = "testing";
-			File file = new File("C:\\users\\lczornyj\\workspace\\Lee-Cz-Ims\\" +Filename );
+			
+			File file = new File(fileLocation + nameOfFile+".txt");
 			if (!file.exists() ) {
 				file.createNewFile();
 			}
@@ -91,7 +97,6 @@ public class MainMenu {
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.write(content);
 			bw.close();
-			System.out.println("done");
 		} catch (IOException e) {
 			e.printStackTrace();
 			
