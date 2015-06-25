@@ -8,7 +8,7 @@ import java.util.Scanner;
  *
  */
 
-public class Search {
+public class SearchForProduct {
 
 	/**
 	 * newSearch is designed for the user to decide by which attribute they want to search for.
@@ -16,6 +16,7 @@ public class Search {
 	 * @return
 	 */
 	public Product newSearch(ArrayList<Product> products) {
+		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		System.out.print("Do you wish to search by name / ID? ");
 		String command = in.next();
@@ -30,12 +31,17 @@ public class Search {
 	 * @return
 	 */
 	private Product nameSearch(ArrayList<Product> products) {
+		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
-		System.out.print("What is the products namme? ");
+		System.out.print("What is the products name? ");
 		String name = in.next();
 			for(Product p : products) {
-				if (p.getName().equalsIgnoreCase(name))
-					return p;			
+				//System.out.println(p.getName() + " : " + name);
+
+				if (p.getName().equalsIgnoreCase(name)) {
+					System.out.println(p.getName() + ", " + p.getproductid() + ", " + p.getStock());
+					return p;
+				}
 			}
 			return null;
 		}
@@ -46,11 +52,13 @@ public class Search {
 	 * @return
 	 */
 	private Product idSearch(ArrayList<Product> products) {
+		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		System.out.print("What is the products ID number? ");
 		int id = in.nextInt();
 			for(Product p : products) {
-				if (p.getId() == id)
+				if (p.getproductid() == id)
+					System.out.println(p.getName() + ", " + p.getproductid() + ", " + p.getStock());
 					return p;			
 			}
 			return null;

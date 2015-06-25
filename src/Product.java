@@ -1,21 +1,29 @@
 
 
 public class Product {
+	
 	private String name;
-	private int id;
+	private int productid;
 	private int stock;
 	
+	public Product(String name, int productid, int lvl)
+	{
+		this.name = name;
+		this.stock = lvl;
+		this.productid = productid;
+		
+	}
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getId() {
-		return id;
+	public int getproductid() {
+		return productid;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setproductid(int productid) {
+		this.productid = productid;
 	}
 	public int getStock() {
 		return stock;
@@ -23,4 +31,9 @@ public class Product {
 	public void setStock(int stock) {
 		this.stock = stock;
 	} 
+	public String toString(){
+		String stringA;
+		stringA = this.name;
+		return stringA;
+	}
 }

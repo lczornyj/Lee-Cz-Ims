@@ -11,7 +11,9 @@ import java.util.Scanner;
  * @author lczornyj
  *
  */
-public class Add {
+
+
+public class AddProduct {
 
 	/**
 	 * This method is designed so that a user can add a new item into the list.
@@ -21,9 +23,14 @@ public class Add {
 	 * @param products
 	 * @return
 	 */
+
+
+
 	public ArrayList<Product> addProduct(ArrayList<Product> products) {	
-		int numberOfProducts = 0;
+		
+		
 		System.out.print("What is the name of the product you wish to add? ");
+		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		String name = in.next();
 		//duplicates
@@ -35,8 +42,10 @@ public class Add {
 		if (!exsistes){
 			System.out.print("How many items of the product do you wish to add? ");
 			int lvl = in.nextInt();
-			Product product = new Product();
-			numberOfProducts += 1;
+			int numberOfProducts = products.size();
+			Product product = new Product(name,numberOfProducts,lvl);
+			products.add(product);
+			
 		}
 		else {
 			System.out.println("Item already exsists");

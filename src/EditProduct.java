@@ -8,8 +8,8 @@ import java.util.Scanner;
  * @author lczornyj
  *
  */
-public class Edit {
-	private Search search = new Search();
+public class EditProduct {
+	private SearchForProduct search = new SearchForProduct();
 	private ArrayList<Product> products;
 	private Product product;
 	/**
@@ -21,6 +21,7 @@ public class Edit {
 		this.products = products;
 		product = search.newSearch(products);
 		System.out.print("Do you wish to edit this product? yes / no: ");
+		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		String edit = in.next();
 		if(edit.equalsIgnoreCase("yes"))
@@ -33,12 +34,18 @@ public class Edit {
 	 * If the user types anything other than name, then it registers it as stock and uses the editStock method.
 	 */
 	private void whatToEdit() {
+		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		System.out.print("Do you wish to edit the name / stock: ");
 		String type = in.next();
-		if(type.equalsIgnoreCase("name"))
+		if(type.equalsIgnoreCase("name")){
 			editName();
-		editStock();
+		System.out.println(product.getName() + ", " + product.getproductid() + ", " + product.getStock());}
+
+		else {
+			editStock();
+			System.out.println(product.getName() + ", " + product.getproductid() + ", " + product.getStock());	
+		}
 	}
 /**
  * This is the editName method, it requires the user to input a new name for the product, and then saves that new name for the product.
@@ -46,6 +53,7 @@ public class Edit {
  * When typing in a new name, there must not be any spaces, numbers or punctuation.
  */
 	private void editName() {
+		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		System.out.print("What is the products new name? ");
 		String name = in.next();
@@ -58,6 +66,7 @@ public class Edit {
  * When typing in a new name, there must not be any spaces, letters or punctuation.
  */
 	private void editStock() {
+		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		System.out.print("What is the products new stock level? ");
 		int stock = in.nextInt();
@@ -73,7 +82,7 @@ public class Edit {
 	private int findIndexOf(Product product){
 		for (int i = 0; i < products.size(); i++) {
 			Product p = products.get(i);
-			if (p.getId() == product.getId())
+			if (p.getproductid() == product.getproductid())
 				return i;
 		}
 		return products.size()+1;
