@@ -6,6 +6,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 /**
@@ -22,34 +23,28 @@ public class MainMenu {
 	private SearchForProduct search = new SearchForProduct();
 	private EditProduct edit = new EditProduct();
 	private ArrayList<Product> products = new ArrayList<Product>();
+	private String nameOfFile;
+	private String fileLocation;
 		
 	public MainMenu() {
 		displayHelp.displayMenuItems();
 		menuOptions();
+		
+		System.out.print("Enter the files location: ");
+		Scanner in = new Scanner(System.in);
+		fileLocation = in.nextLine().trim();
+		System.out.print("What is the files name? ");
+		Scanner user = new Scanner(System.in);
+		nameOfFile = user.nextLine();
+		File file = new File(fileLocation + nameOfFile+".txt");
+		
 		for(Product product : products) 
 		{
 			System.out.println(product.getName() + ", " + product.getproductid() + ", " + product.getStock());
-			WriteToFile();
+				
 		}
 	}
-	/*WriteFile data = new WriteFile( "Test" , true );
-	private String path;
-	private boolean append_to_file = false;
-	
-	public void WriteFile(String file_path){
-		path = file_path;
-	}
-	public void WriteFile(String file_path, boolean append_value){
-		path = file_path;
-		append_to_file =append_value;
-	}
-	public void WriteToFile(String TextLine) throws IOException {
-		FileWriter write = new FileWriter(path, append_to_file);
-	PrintWriter print_line =new PrintWriter(write);
-	print_line.printf("%s " + "%n", TextLine);
-	print_line.close();
-	}
-*/
+
 	private void menuOptions() {
 		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
@@ -78,16 +73,10 @@ public class MainMenu {
 				System.out.println("I want to end");
 				break;	
 		}
-	}
-	public static void WriteToFile() {
-		System.out.print("Enter the files location: ");
-		Scanner in = new Scanner(System.in);
-		String fileLocation = in.nextLine().trim();
-		System.out.print("What is the files name? ");
-		Scanner user = new Scanner(System.in);
-		String nameOfFile = user.nextLine();
-		try {
-			String content = "this is the content";
+	
+	/*public static void WriteToFile(Product product,String fileLocation,String nameOfFile) {
+		
+		try {String content = product.toString(product.getName() + product.getproductid() + product.getStock());
 			
 			File file = new File(fileLocation + nameOfFile+".txt");
 			if (!file.exists() ) {
@@ -105,7 +94,17 @@ public class MainMenu {
 			// TODO: handle exception
 		}
 			
+		}*/
+		
+	try { PrintWriter filewriter = new PrintWriter(new BufferedWriter( new FileWriter(fileLocation+nameOfFile+".txt", true)));
+		File file = new File(fileLocation+nameOfFile+".txt");
+		file.createNewFile();
+	for (int i = 0; i < products.size(); ++i) {
+		filewriter.println(products.get(i).getName() + " " + products.get(i).getproductid() + " " + products.get(i).getStock());	
 		}
-		
-		
 	}
+		catch (IOException e) {
+		}
+	}
+	
+}
