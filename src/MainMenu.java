@@ -2,13 +2,15 @@
 
 
 
-import java.io.BufferedWriter;
+
+import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
+
 /**
  * This is the main menu for the user, it contains all the commands that are accessible to the user in the console.
  * @author lczornyj
@@ -37,6 +39,8 @@ public class MainMenu {
 		Scanner user = new Scanner(System.in);
 		nameOfFile = user.nextLine();
 		File file = new File(fileLocation + nameOfFile+".txt");
+		
+		fileWritingMethod(file);
 		
 		for(Product product : products) 
 		{
@@ -73,38 +77,37 @@ public class MainMenu {
 				System.out.println("I want to end");
 				break;	
 		}
+	}
 	
-	/*public static void WriteToFile(Product product,String fileLocation,String nameOfFile) {
 		
-		try {String content = product.toString(product.getName() + product.getproductid() + product.getStock());
+		Calendar rightNow = Calendar.getInstance();
+		//String localTime = rightNow.toString();
+	//System.out.println(rightNow.getTime().toLocaleString());
+	
+	public void fileWritingMethod(File outputfile) {
+	try {
+		DataOutputStream da = new DataOutputStream(new FileOutputStream(outputfile));
+		for (int i = 0; i < products.size(); ++i){
+			da.writeUTF(products.get(i).getName() + " " + products.get(i).getproductid() + " " + products.get(i).getStock() + "\r\n");
 			
-			File file = new File(fileLocation + nameOfFile+".txt");
-			if (!file.exists() ) {
-				file.createNewFile();
-			}
-			FileWriter fw = new FileWriter(file.getAbsoluteFile());
-			BufferedWriter bw = new BufferedWriter(fw);
-			bw.write(content);
-			bw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-			
-			
-		} catch (Exception e) {
-			// TODO: handle exception
 		}
-			
-		}*/
+		da.writeUTF(rightNow.getTime().toLocaleString());
+		da.close();
+	}
+	catch(IOException e){
 		
+	}
+	}
+
+	/*	
 	try { PrintWriter filewriter = new PrintWriter(new BufferedWriter( new FileWriter(fileLocation+nameOfFile+".txt", true)));
-		File file = new File(fileLocation+nameOfFile+".txt");
-		file.createNewFile();
+	//	File file = new File(fileLocation+nameOfFile+".txt");
+		//file.createNewFile();
 	for (int i = 0; i < products.size(); ++i) {
 		filewriter.println(products.get(i).getName() + " " + products.get(i).getproductid() + " " + products.get(i).getStock());	
 		}
 	}
 		catch (IOException e) {
-		}
+		} */
 	}
 	
-}
