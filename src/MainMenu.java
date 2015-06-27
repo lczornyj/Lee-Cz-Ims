@@ -7,6 +7,7 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
@@ -29,6 +30,7 @@ public class MainMenu {
 	private String nameOfFile;
 	private String fileLocation;
 	private int randomNumber;
+	private Product product;
 	
 	public MainMenu() {
 	displayHelp.displayMenuItems();
@@ -47,8 +49,8 @@ public class MainMenu {
 		{
 			System.out.println(product.getName() + ", " + product.getproductid() + ", " + product.getStock());			
 		}
+		numberGenerator();
 	}
-
 	private void menuOptions() {
 		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
@@ -93,35 +95,27 @@ public class MainMenu {
 	catch(IOException e){
 		}
 	}
-	public static int numberGenerator (){
+	public void numberGenerator (){
 		Random generator = new Random();
 		int i = generator.nextInt(10)+1;
-		System.out.println(i);
-		return i;
-		
+		System.out.println(i);		
 	}
-	
-	  public static int thisisatest() {
-		    //note a single Random object is reused here
-		    Random randomGenerator = new Random();
-		    for (int idx = 1; idx <= 10; ++idx){
-		      int randomInt = randomGenerator.nextInt(10);
-		      System.out.println(randomInt);
-		     return randomInt; 
-		    }
-			return (Integer) null;
-		  }
-	
-	/*public static void calculations() {
+	public static void calculations(int numberGenerator) {
 		int stock = 0;
-		if(stock <= 0){
-			stock = 0;
-		}	
-		else {
-		
-			stock = stock - randomNum;
+		for (int i = 0; i<1000000000; ++i){
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(stock <= 0){
+				stock = 0;
+			}	
+			else {
+			
+				stock = stock - numberGenerator;
+			}		
 		}
-	}*/
-	
-		
+	}	
 }
