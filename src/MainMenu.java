@@ -28,7 +28,8 @@ public class MainMenu {
 	private ArrayList<Product> products = new ArrayList<Product>();
 	private String nameOfFile;
 	private String fileLocation;
-
+	private int randomNumber;
+	
 	public MainMenu() {
 	displayHelp.displayMenuItems();
 		menuOptions();
@@ -92,12 +93,24 @@ public class MainMenu {
 	catch(IOException e){
 		}
 	}
-	public static int randInt(int min, int max){
-		Random rand = new Random();
-		int randomNum = rand.nextInt((max-min) +1 ) +min;
-		System.out.println(randomNum);	
-		return randomNum;
+	public static int numberGenerator (){
+		Random generator = new Random();
+		int i = generator.nextInt(10)+1;
+		System.out.println(i);
+		return i;
+		
 	}
+	
+	  public static int thisisatest() {
+		    //note a single Random object is reused here
+		    Random randomGenerator = new Random();
+		    for (int idx = 1; idx <= 10; ++idx){
+		      int randomInt = randomGenerator.nextInt(10);
+		      System.out.println(randomInt);
+		     return randomInt; 
+		    }
+			return (Integer) null;
+		  }
 	
 	/*public static void calculations() {
 		int stock = 0;
