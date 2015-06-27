@@ -29,7 +29,7 @@ public class MainMenu {
 	private String fileLocation;
 
 	public MainMenu() {
-		displayHelp.displayMenuItems();
+	displayHelp.displayMenuItems();
 		menuOptions();
 		
 
@@ -102,4 +102,5 @@ public class MainMenu {
 		
 		}
 	}
+	
 }
