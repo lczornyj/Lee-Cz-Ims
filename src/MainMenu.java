@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -45,12 +46,6 @@ public class MainMenu {
 		{
 			System.out.println(product.getName() + ", " + product.getproductid() + ", " + product.getStock());			
 		}
-		
-		for(Product product : products) 
-		{
-			System.out.println(product.getName() + ", " + product.getproductid() + ", " + product.getStock());
-				
-		}
 	}
 
 	private void menuOptions() {
@@ -85,22 +80,35 @@ public class MainMenu {
 	
 		
 		Calendar rightNow = Calendar.getInstance();
-		//String localTime = rightNow.toString();
-	//System.out.println(rightNow.getTime().toLocaleString());
-	
 	public void fileWritingMethod(File outputfile) {
 	try {
 		DataOutputStream da = new DataOutputStream(new FileOutputStream(outputfile));
 		for (int i = 0; i < products.size(); ++i){
 			da.writeUTF(products.get(i).getName() + " " + products.get(i).getproductid() + " " + products.get(i).getStock() + "\r\n");
-			
 			}
 		da.writeUTF(rightNow.getTime().toLocaleString());
 		da.close();
 		}
 	catch(IOException e){
-		
 		}
 	}
+	public static int randInt(int min, int max){
+		Random rand = new Random();
+		int randomNum = rand.nextInt((max-min) +1 ) +min;
+		System.out.println(randomNum);	
+		return randomNum;
+	}
 	
+	/*public static void calculations() {
+		int stock = 0;
+		if(stock <= 0){
+			stock = 0;
+		}	
+		else {
+		
+			stock = stock - randomNum;
+		}
+	}*/
+	
+		
 }
