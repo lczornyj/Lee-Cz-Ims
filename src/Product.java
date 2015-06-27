@@ -31,7 +31,7 @@ public class Product {
 	public void setStock(int stock) {
 		this.stock = stock;
 	} 
-	public String toString(){
+	public String toString(String string){
 		String stringA;
 		stringA = this.name;
 		return stringA;
