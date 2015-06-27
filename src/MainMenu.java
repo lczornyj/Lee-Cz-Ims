@@ -27,9 +27,12 @@ public class MainMenu {
 	private ArrayList<Product> products = new ArrayList<Product>();
 	private String nameOfFile;
 	private String fileLocation;
+
 	public MainMenu() {
 		displayHelp.displayMenuItems();
 		menuOptions();
+		
+
 		System.out.print("Enter the files location: ");
 		Scanner in = new Scanner(System.in);
 		fileLocation = in.nextLine().trim();
@@ -42,7 +45,14 @@ public class MainMenu {
 		{
 			System.out.println(product.getName() + ", " + product.getproductid() + ", " + product.getStock());			
 		}
+		
+		for(Product product : products) 
+		{
+			System.out.println(product.getName() + ", " + product.getproductid() + ", " + product.getStock());
+				
+		}
 	}
+
 	private void menuOptions() {
 		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
@@ -72,7 +82,12 @@ public class MainMenu {
 				break;	
 		}
 	}
-		Calendar rightNow = Calendar.getInstance();	
+	
+		
+		Calendar rightNow = Calendar.getInstance();
+		//String localTime = rightNow.toString();
+	//System.out.println(rightNow.getTime().toLocaleString());
+	
 	public void fileWritingMethod(File outputfile) {
 	try {
 		DataOutputStream da = new DataOutputStream(new FileOutputStream(outputfile));
@@ -88,4 +103,3 @@ public class MainMenu {
 		}
 	}
 }
-	
