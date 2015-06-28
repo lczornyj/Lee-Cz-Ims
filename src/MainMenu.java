@@ -29,8 +29,8 @@ public class MainMenu {
 	private ArrayList<Product> products = new ArrayList<Product>();
 	private String nameOfFile;
 	private String fileLocation;
-	private int randomNumber;
 	private Product product;
+	private int numberGenerator;
 	
 	public MainMenu() {
 	displayHelp.displayMenuItems();
@@ -49,7 +49,7 @@ public class MainMenu {
 		{
 			System.out.println(product.getName() + ", " + product.getproductid() + ", " + product.getStock());			
 		}
-		numberGenerator();
+		calculations(numberGenerator);
 	}
 	private void menuOptions() {
 		@SuppressWarnings("resource")
@@ -113,7 +113,7 @@ public class MainMenu {
 				stock = 0;
 			}	
 			else {
-			
+			// needs work to find the right value and decrease, as well as have it running during programme.
 				stock = stock - numberGenerator;
 			}		
 		}
