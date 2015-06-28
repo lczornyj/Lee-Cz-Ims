@@ -29,7 +29,6 @@ public class MainMenu {
 	private ArrayList<Product> products = new ArrayList<Product>();
 	private String nameOfFile;
 	private String fileLocation;
-	private Product product;
 	private int numberGenerator;
 	
 	public MainMenu() {
@@ -109,8 +108,8 @@ public class MainMenu {
 		Random stockgenerator = new Random();
 		int stocknumber = stockgenerator.nextInt(maxvalue);
 		int adjustments = products.get(stocknumber).getStock();
-		adjustments = adjustments - generator;
-		if(adjustments <= 0){
+		int testLimits = adjustments - numberGenerator;
+		if(testLimits <= 0){
 			adjustments = 0;
 		}	
 		else {
@@ -123,7 +122,7 @@ public class MainMenu {
 		
 	}
 	public static void calculations(int numberGenerator) {
-		int stock = 0;
+		
 		for (int i = 0; i<1000000000; ++i){
 			try {
 				Thread.sleep(5000);
