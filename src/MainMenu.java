@@ -49,7 +49,8 @@ public class MainMenu {
 		{
 			System.out.println(product.getName() + ", " + product.getproductid() + ", " + product.getStock());			
 		}
-		calculations(numberGenerator);
+		//calculations(numberGenerator);
+		numberGenerator();
 	}
 	private void menuOptions() {
 		@SuppressWarnings("resource")
@@ -95,10 +96,31 @@ public class MainMenu {
 	catch(IOException e){
 		}
 	}
+	
 	public void numberGenerator (){
 		Random generator = new Random();
 		int i = generator.nextInt(10)+1;
-		System.out.println(i);		
+		System.out.println(i);
+		
+		// select random product based of integer
+		
+		
+		int maxvalue = products.size();
+		Random stockgenerator = new Random();
+		int stocknumber = stockgenerator.nextInt(maxvalue);
+		int adjustments = products.get(stocknumber).getStock();
+		adjustments = adjustments - generator;
+		if(adjustments <= 0){
+			adjustments = 0;
+		}	
+		else {
+		// needs work to find the right value and decrease, as well as have it running during programme.
+			adjustments = adjustments - numberGenerator;
+		}
+		products.get(stocknumber).setStock(adjustments);
+		
+		
+		
 	}
 	public static void calculations(int numberGenerator) {
 		int stock = 0;
@@ -109,13 +131,7 @@ public class MainMenu {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			if(stock <= 0){
-				stock = 0;
-			}	
-			else {
-			// needs work to find the right value and decrease, as well as have it running during programme.
-				stock = stock - numberGenerator;
-			}		
+					
 		}
 	}	
 }
