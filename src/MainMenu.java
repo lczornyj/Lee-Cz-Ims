@@ -98,8 +98,8 @@ public class MainMenu {
 	
 	public void numberGenerator (){
 		Random generator = new Random();
-		int i = generator.nextInt(10)+1;
-		System.out.println(i);
+		int randomDecrease = generator.nextInt(10)+1;
+		System.out.println(randomDecrease);
 		
 		// select random product based of integer
 		
@@ -108,13 +108,13 @@ public class MainMenu {
 		Random stockgenerator = new Random();
 		int stocknumber = stockgenerator.nextInt(maxvalue);
 		int adjustments = products.get(stocknumber).getStock();
-		int testLimits = adjustments - numberGenerator;
+		int testLimits = adjustments - randomDecrease;
 		if(testLimits <= 0){
 			adjustments = 0;
 		}	
 		else {
 		// needs work to find the right value and decrease, as well as have it running during programme.
-			adjustments = adjustments - numberGenerator;
+			adjustments = adjustments - randomDecrease;
 		}
 		products.get(stocknumber).setStock(adjustments);
 		
