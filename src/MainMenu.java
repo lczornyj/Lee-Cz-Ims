@@ -162,8 +162,6 @@ public class MainMenu {
 					
 		}
 	}
-	
-
 	Thread thread2 = new Thread(){
 		public void run() {
 			MainMenu mm = new MainMenu();
