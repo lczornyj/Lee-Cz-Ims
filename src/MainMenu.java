@@ -148,8 +148,6 @@ public class MainMenu {
 		}
 		return 1; 
 	}
-	
-	
 	// work in progress for decrement along side the main method.
 	public void calculations(int numberGenerator) {
 		System.out.println("test");
