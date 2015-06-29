@@ -7,7 +7,6 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
@@ -26,7 +25,7 @@ public class MainMenu {
 	private AddProduct add = new AddProduct();
 	private SearchForProduct search = new SearchForProduct();
 	private EditProduct edit = new EditProduct();
-	private ArrayList<Product> products = new ArrayList<Product>();
+	private static ArrayList<Product> products = new ArrayList<Product>();
 	private String nameOfFile;
 	private String fileLocation;
 	
@@ -37,14 +36,21 @@ public class MainMenu {
 	 * The main menu with the various commands are then accessed through the menuOptions method.
 	 */
 	
+	public void tread() {
+		thread2.run();
+	}
+	
 	public MainMenu() {
-	displayHelp.displayMenuItems();
-		menuOptions();
 		
-/**
+		displayHelp.displayMenuItems();
+		
+/*	
+	menuOptions();
+	
+		
  * Determines the files location and name using user inputs.
  * Then the list of products are output at the end of the inputs.
- */
+ 
 		System.out.print("Enter the files location: ");
 		Scanner in = new Scanner(System.in);
 		fileLocation = in.nextLine().trim();
@@ -58,6 +64,7 @@ public class MainMenu {
 			System.out.println(product.getName() + ", " + product.getproductid() + ", " + product.getStock());			
 		}
 		numberGenerator();
+*/
 	}
 	/**
 	 * The main menu options. This contains a user input at the start which then activates
@@ -118,9 +125,10 @@ public class MainMenu {
 	 * level. If at any point a products stock level gets below 15, the method
 	 * then outputs a warning.
 	 */
-	public void numberGenerator (){
+	public int numberGenerator (){
+		System.out.println("test");
 		Random generator = new Random();
-		int randomDecrease = generator.nextInt(10)+1;
+		int randomDecrease = generator.nextInt(5)+1;
 		// select random product based of random integer selected and take product id from that number
 		int maxvalue = products.size();
 		Random stockgenerator = new Random();
@@ -138,14 +146,16 @@ public class MainMenu {
 			//System.out.println("the product" + (products.getName() + ", ID number " + product.getproductid() + ", has stock of " + product.getStock() + "Reorder this product");
 			System.out.println("test");
 		}
+		return 1; 
 	}
 	
 	
 	// work in progress for decrement along side the main method.
-	public static void calculations(int numberGenerator) {
-		
+	public void calculations(int numberGenerator) {
+		System.out.println("test");
 		for (int i = 0; i<1000000000; ++i){
 			try {
+				numberGenerator();
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -153,5 +163,14 @@ public class MainMenu {
 			}
 					
 		}
-	}	
+	}
+	
+
+	Thread thread2 = new Thread(){
+		public void run() {
+			MainMenu mm = new MainMenu();
+			mm.calculations(mm.numberGenerator());
+		}
+	};
 }
+

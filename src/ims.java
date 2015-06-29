@@ -5,6 +5,6 @@ public class ims {
 
 		@SuppressWarnings("unused")
 		MainMenu mainMenu = new MainMenu();
-		
+		mainMenu.tread();
 	}
 }
