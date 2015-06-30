@@ -76,6 +76,7 @@ public class MainMenu {
 			break;
 		case "Add": 
 			products = add.addProduct(products);
+			fileWritingMethod(null);
 			menuOptions();
 			break;
 		case "Edit":
