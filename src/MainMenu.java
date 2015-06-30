@@ -51,10 +51,10 @@ public class MainMenu {
 		
 		System.out.print("Enter the files location: ");
 		Scanner in = new Scanner(System.in);
-		fileLocation = in.nextLine().trim();
+		fileLocation = in.nextLine().trim().toLowerCase();
 		System.out.print("What is the files name? ");
 		Scanner user = new Scanner(System.in);
-		nameOfFile = user.nextLine();
+		nameOfFile = user.nextLine().toLowerCase();
 		File file = new File(fileLocation + nameOfFile+"" + fileversiron + ".txt");
 		
 		displayHelp.displayMenuItems();
