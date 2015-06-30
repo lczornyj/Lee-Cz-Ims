@@ -25,10 +25,9 @@ public class MainMenu {
 	private AddProduct add = new AddProduct();
 	private SearchForProduct search = new SearchForProduct();
 	private EditProduct edit = new EditProduct();
-	private static ArrayList<Product> products = new ArrayList<Product>();
+	private ArrayList<Product> products = new ArrayList<Product>();
 	private String nameOfFile;
-	private String fileLocation;
-	
+	private int fileversiron = 0;
 	/**
 	 * The main method which is the central controller of the IMS created.
 	 * This contains all commands used to initialise the programme along with the construction
@@ -36,36 +35,48 @@ public class MainMenu {
 	 * The main menu with the various commands are then accessed through the menuOptions method.
 	 */
 	
-	public void tread() {
+	public void runthread() {
+	//	System.out.println("Do you wish to simulate sales? ");
+	//	Scanner in = new Scanner(System.in);
+	//	String yes = in.next();
+	//	if (yes.equalsIgnoreCase("yes")){
 		thread2.run();
+	//	}
+	//	else {
+	//		thread2.stop();
+	//	}
 	}
 	
 	public MainMenu() {
 		
-		displayHelp.displayMenuItems();
-		
-/*	
-	menuOptions();
-	
-		
- * Determines the files location and name using user inputs.
- * Then the list of products are output at the end of the inputs.
- 
 		System.out.print("Enter the files location: ");
 		Scanner in = new Scanner(System.in);
 		fileLocation = in.nextLine().trim();
 		System.out.print("What is the files name? ");
 		Scanner user = new Scanner(System.in);
 		nameOfFile = user.nextLine();
-		File file = new File(fileLocation + nameOfFile+".txt");
-		fileWritingMethod(file);
-		for(Product product : products) 
-		{
-			System.out.println(product.getName() + ", " + product.getproductid() + ", " + product.getStock());			
-		}
-		numberGenerator();
-*/
+		File file = new File(fileLocation + nameOfFile+"" + fileversiron + ".txt");
+		
+		displayHelp.displayMenuItems();
+			
+		menuOptions();
+	
+		/*System.out.print("Enter the files location: ");
+		Scanner in = new Scanner(System.in);
+		fileLocation = in.nextLine().trim();
+		System.out.print("What is the files name? ");
+		Scanner user = new Scanner(System.in);
+		nameOfFile = user.nextLine();
+		File file = new File(fileLocation + nameOfFile+"" + fileversiron + ".txt");
+		*/
+		
+		//fileWritingMethod(file);
+		//for(Product product : products) 
+		//{
+			//System.out.println(product.getName() + ", " + product.getproductid() + ", " + product.getStock());			
+		//}
 	}
+	
 	/**
 	 * The main menu options. This contains a user input at the start which then activates
 	 * a particular method. This then loops round back to the main menu so that another
@@ -106,33 +117,38 @@ public class MainMenu {
 	 *  user has called the file. At the end of the text file, will be a date when 
 	 *  the list was created.
 	 */
+		
+	private String fileLocation;
+	public void fileWritingMethod() {
 		Calendar rightNow = Calendar.getInstance();
-	public void fileWritingMethod(File outputfile) {
-	try {
-		DataOutputStream da = new DataOutputStream(new FileOutputStream(outputfile));
-		da.writeUTF("Product   ID   Stock level \r\n");
+		try {
+		File file = new File(fileLocation + nameOfFile+"" + fileversiron + ".txt");
+		DataOutputStream datawriting = new DataOutputStream(new FileOutputStream(file));
+		datawriting.writeUTF("*** STOCK  REPORT *** \r\n\r\n");
+		datawriting.writeUTF("Product   ID   Stock level \r\n");
 		for (int i = 0; i < products.size(); ++i){
-			da.writeUTF(products.get(i).getName() + "     " + products.get(i).getproductid() + "       " + products.get(i).getStock() + "\r\n");
+			datawriting.writeUTF(products.get(i).getName() + "     " + products.get(i).getproductid() + "       " + products.get(i).getStock() + "\r\n");
 			}
-		da.writeUTF(rightNow.getTime().toLocaleString());
-		da.close();
+		datawriting.writeUTF(rightNow.getTime().toLocaleString());
+		datawriting.close();
 		}
 	catch(IOException e){
 		}
 	}
+	
 	/**
 	 * This is a random number generator to simulate the decrement of the stock
 	 * level. If at any point a products stock level gets below 15, the method
 	 * then outputs a warning.
 	 */
 	public int numberGenerator (){
-		System.out.println("test");
 		Random generator = new Random();
 		int randomDecrease = generator.nextInt(5)+1;
 		// select random product based of random integer selected and take product id from that number
 		int maxvalue = products.size();
 		Random stockgenerator = new Random();
 		if (maxvalue > 0){
+			//System.out.println("test1");
 			int stocknumber = stockgenerator.nextInt(maxvalue);
 			int adjustments = products.get(stocknumber).getStock();
 			int testLimits = adjustments - randomDecrease;
@@ -143,16 +159,19 @@ public class MainMenu {
 					adjustments = adjustments - randomDecrease;
 					}
 				products.get(stocknumber).setStock(adjustments);
-				if (products.get(stocknumber).getStock() < 15){
-					//reorder of stock required somewhere in here
+				fileWritingMethod();
+				int threshold = products.get(stocknumber).getStock();
+				if (threshold >= 25 && threshold <50){
+					System.out.println("product: " + products.get(stocknumber).getName() + " is low, reorder stock");
+				} else if (threshold > 0 && threshold <25) {
+					System.out.println("product: " + products.get(stocknumber).getName() + " is critical, reorder stock now");
+				}  else if (threshold ==0) {
+					System.out.println("product: " + products.get(stocknumber).getName() + " is out of stock, urgent attention required");	
 				}
-				
 			}
-			else{
-			
-		}
-		return 1;
 		
+		
+		return 1;
 	}
 	// work in progress for decrement along side the main method.
 	public void calculations(int numberGenerator) {
@@ -169,9 +188,10 @@ public class MainMenu {
 	}
 	Thread thread2 = new Thread(){
 		public void run() {
-			MainMenu mm = new MainMenu();
-			mm.calculations(mm.numberGenerator());
+			calculations(numberGenerator());
+			//Runnable;
 		}
 	};
+
 }
 
