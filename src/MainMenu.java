@@ -132,25 +132,30 @@ public class MainMenu {
 		// select random product based of random integer selected and take product id from that number
 		int maxvalue = products.size();
 		Random stockgenerator = new Random();
-		int stocknumber = stockgenerator.nextInt(maxvalue);
-		int adjustments = products.get(stocknumber).getStock();
-		int testLimits = adjustments - randomDecrease;
-		if(testLimits <= 0){
-			adjustments = 0;
-		}	
-		else { 
-			adjustments = adjustments - randomDecrease;
+		if (maxvalue > 0){
+			int stocknumber = stockgenerator.nextInt(maxvalue);
+			int adjustments = products.get(stocknumber).getStock();
+			int testLimits = adjustments - randomDecrease;
+				if(testLimits <= 0){
+					adjustments = 0;
+					}	
+				else { 
+					adjustments = adjustments - randomDecrease;
+					}
+				products.get(stocknumber).setStock(adjustments);
+				if (products.get(stocknumber).getStock() < 15){
+					//reorder of stock required somewhere in here
+				}
+				
+			}
+			else{
+			
 		}
-		products.get(stocknumber).setStock(adjustments);
-		if (products.get(stocknumber).getStock() < 15){
-			//System.out.println("the product" + (products.getName() + ", ID number " + product.getproductid() + ", has stock of " + product.getStock() + "Reorder this product");
-			System.out.println("test");
-		}
-		return 1; 
+		return 1;
+		
 	}
 	// work in progress for decrement along side the main method.
 	public void calculations(int numberGenerator) {
-		System.out.println("test");
 		for (int i = 0; i<1000000000; ++i){
 			try {
 				numberGenerator();
