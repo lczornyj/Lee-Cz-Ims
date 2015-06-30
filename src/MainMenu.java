@@ -87,29 +87,27 @@ public class MainMenu {
 		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		String command = in.next();
-		switch (command) {
-		case "Help": 
+		switch (command.toLowerCase()) {
+		case "help": 
 			displayHelp.displayMenuItems();
 			menuOptions();
 			break;
-		case "Add": 
+		case "add": 
 			products = add.addProduct(products);
 			menuOptions();
 			break;
-		case "Edit":
+		case "edit":
 			products = edit.newEdit(products);
 			menuOptions();
 			break;
-		case "Search":
+		case "search":
 			search.newSearch(products);
 			menuOptions();
 			break;
-		case "End": 
+		case "end": 
 			System.out.println("I want to end");
 			break;
-			default:
-				System.out.println("I want to end");
-				break;	
+			
 		}
 	}
 	/**
