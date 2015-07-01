@@ -20,4 +20,5 @@ public class DisplayHelp {
 		System.out.println(" ");
 		System.out.print("Please enter one of the commands: ");
 	}
+	
 }

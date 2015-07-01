@@ -9,7 +9,6 @@ import java.util.Scanner;
  */
 
 public class SearchForProduct {
-
 	/**
 	 * newSearch is designed for the user to decide by which attribute they want to search for.
 	 * @param products
@@ -63,4 +62,5 @@ public class SearchForProduct {
 			}
 			return null;
 	}
+	
 }

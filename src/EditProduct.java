@@ -17,6 +17,7 @@ public class EditProduct {
 	 * @param products
 	 * @return
 	 */
+	
 	public ArrayList<Product> newEdit(ArrayList<Product> products) {
 		this.products = products;
 		product = search.newSearch(products);

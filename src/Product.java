@@ -11,7 +11,6 @@ public class Product {
 		this.name = name;
 		this.stock = lvl;
 		this.productid = productid;
-		
 	}
 	public String getName() {
 		return name;
@@ -36,4 +35,5 @@ public class Product {
 		stringA = this.name;
 		return stringA;
 	}
+	
 }
