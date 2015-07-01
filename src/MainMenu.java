@@ -60,21 +60,6 @@ public class MainMenu {
 		displayHelp.displayMenuItems();
 			
 		menuOptions();
-	
-		/*System.out.print("Enter the files location: ");
-		Scanner in = new Scanner(System.in);
-		fileLocation = in.nextLine().trim();
-		System.out.print("What is the files name? ");
-		Scanner user = new Scanner(System.in);
-		nameOfFile = user.nextLine();
-		File file = new File(fileLocation + nameOfFile+"" + fileversiron + ".txt");
-		*/
-		
-		//fileWritingMethod(file);
-		//for(Product product : products) 
-		//{
-			//System.out.println(product.getName() + ", " + product.getproductid() + ", " + product.getStock());			
-		//}
 	}
 	
 	/**
@@ -180,8 +165,7 @@ public class MainMenu {
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-					
+			}		
 		}
 	}
 	Thread thread2 = new Thread(){
@@ -190,6 +174,5 @@ public class MainMenu {
 			//Runnable;
 		}
 	};
-
 }
 

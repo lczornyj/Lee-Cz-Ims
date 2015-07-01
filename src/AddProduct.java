@@ -24,11 +24,7 @@ public class AddProduct {
 	 * @return
 	 */
 
-
-
 	public ArrayList<Product> addProduct(ArrayList<Product> products) {	
-		
-		
 		System.out.print("What is the name of the product you wish to add? ");
 		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
