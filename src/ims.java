@@ -5,7 +5,8 @@ public class ims {
 
 		@SuppressWarnings("unused")
 		MainMenu mainMenu = new MainMenu();
-		mainMenu.runthread();
+		//mainMenu.runthread();
+		new ImsGUI();
 	}
 	
 }
