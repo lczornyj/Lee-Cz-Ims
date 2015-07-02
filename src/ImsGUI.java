@@ -32,7 +32,9 @@ public class ImsGUI extends JFrame implements ActionListener {
 	public void createMainMenu () {
 		
 		JMenu file = new JMenu("File");
+		file.setMnemonic(KeyEvent.VK_F);
 		JMenu reports = new JMenu("Reports");
+		reports.setMnemonic(KeyEvent.VK_R);
 		menu.add(file);
 		menu.add(reports);
 		// add menu options for file 
