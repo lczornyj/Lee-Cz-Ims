@@ -40,16 +40,14 @@ public class ImsGUI extends JFrame implements ActionListener {
 		menu.add(reports);
 		// add menu options for file 
 		JMenuItem addProduct = new JMenuItem("Add new product");
-		JMenu findProduct = new JMenu("Search for a product");
-		JMenuItem findByName = new JMenuItem("By product name");
-		JMenuItem findByID = new JMenuItem("By product ID number");
+		JMenuItem findProduct = new JMenuItem("Search for a product");
+		
 		JMenu editProduct = new JMenu("Edit an existing product");
 		JMenuItem editProductName = new JMenuItem("Edit product name");
 		JMenuItem editProductStock = new JMenuItem("Edit product stock level");
 		JMenuItem timeSimulation = new JMenuItem("Simulate sales");
 		JMenuItem discontinued = new JMenuItem("Discontinue product");
-		findProduct.add(findByName);
-		findProduct.add(findByID);
+		
 		editProduct.add(editProductName);
 		editProduct.add(editProductStock);
 		file.add(addProduct);
@@ -99,30 +97,38 @@ public class ImsGUI extends JFrame implements ActionListener {
 
 	
 		
-		findByName.addActionListener(new ActionListener() {
+		findProduct.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				statusLabel = new JLabel();
-				frame.add(statusLabel);
+				JFrame addProductWindow = new JFrame();
+				addProductWindow.setLocation(300,300);
+				addProductWindow.setSize(450, 100);
+				addProductWindow.setLayout(new GridLayout(2,2,5,5));
+				addProductWindow.setTitle("Search");
+				addProductWindow.add(new JLabel("Enter product name or product ID:"));
+				
+				addProductWindow.add(new JTextField());
+				setPreferredSize( new Dimension( 200, 24 ) );
+				
+				JButton addProductButton = new JButton("Add Product");
+				addProductButton.addActionListener(new ActionListener() {
 					
-				statusLabel.setText("Gareth");
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						int dialogButton = JOptionPane.YES_NO_OPTION;
+		                JOptionPane.showConfirmDialog (null, "Would You Like to Save your Previous Note First?","Warning",dialogButton);
+					}
+				});
+				
+				addProductWindow.add(addProductButton);
+				
+				addProductWindow.setVisible(true);
 				
 			}
 		});
-		findByID.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				statusLabel = new JLabel();
-				frame.add(statusLabel);
-					
-				statusLabel.setText("How");
-				
-			}
-		});
+
 		editProductName.addActionListener(new ActionListener() {
 			
 			@Override
