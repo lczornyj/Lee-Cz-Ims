@@ -35,17 +35,17 @@ public class MainMenu {
 	 * The main menu with the various commands are then accessed through the menuOptions method.
 	 */
 	
-	public void runthread() {
+	//public void runthread() {
 	//	System.out.println("Do you wish to simulate sales? ");
 	//	Scanner in = new Scanner(System.in);
 	//	String yes = in.next();
 	//	if (yes.equalsIgnoreCase("yes")){
-		thread2.run();
+	//	calculations(numberGenerator());
 	//	}
 	//	else {
-	//		thread2.stop();
+	//
 	//	}
-	}
+	//}
 	
 	public MainMenu() {
 		
@@ -168,11 +168,10 @@ public class MainMenu {
 			}		
 		}
 	}
-	Thread thread2 = new Thread(){
-		public void run() {
+			public void run() {
 			calculations(numberGenerator());
 			//Runnable;
 		}
-	};
+	
 }
 
