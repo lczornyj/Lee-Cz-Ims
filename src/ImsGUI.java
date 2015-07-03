@@ -82,7 +82,7 @@ public class ImsGUI extends JFrame implements ActionListener {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						int dialogButton = JOptionPane.YES_NO_OPTION;
-		                JOptionPane.showConfirmDialog (null, "Would You Like to Save your Previous Note First?","Warning",dialogButton);
+		                JOptionPane.showConfirmDialog (null, "Do you want to add Product: ","Confirmation",dialogButton);
 					}
 				});
 				
