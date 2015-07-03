@@ -64,13 +64,11 @@ public class ImsGUI extends JFrame implements ActionListener {
 		// create actionlisteners for file
 		
 		addProduct.addActionListener(new ActionListener() {
-			
-			JFrame addProductWindow = new JFrame();
-			JFrame addProductConfirmation = new JFrame();
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				JFrame addProductWindow = new JFrame();
 				addProductWindow.setLocation(300,300);
 				addProductWindow.setSize(300, 150);
 				addProductWindow.setLayout(new GridLayout(3,2));
