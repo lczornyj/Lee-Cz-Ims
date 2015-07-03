@@ -65,10 +65,12 @@ public class ImsGUI extends JFrame implements ActionListener {
 		
 		addProduct.addActionListener(new ActionListener() {
 			
+			JFrame addProductWindow = new JFrame();
+			JFrame addProductConfirmation = new JFrame();
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				JFrame addProductWindow = new JFrame();
 				addProductWindow.setLocation(300,300);
 				addProductWindow.setSize(300, 150);
 				addProductWindow.setLayout(new GridLayout(3,2));
@@ -77,24 +79,27 @@ public class ImsGUI extends JFrame implements ActionListener {
 				addProductWindow.add(new JTextField());
 				addProductWindow.add(new JLabel("Enter Initial stock:"));
 				addProductWindow.add(new JTextField());
-				addProductWindow.add(new JButton("Add product"));
-				addProductWindow.setVisible(true);
 				
+				JButton addProductButton = new JButton("Add Product");
+				addProductButton.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						int dialogButton = JOptionPane.YES_NO_OPTION;
+		                JOptionPane.showConfirmDialog (null, "Would You Like to Save your Previous Note First?","Warning",dialogButton);
+					}
+				});
+				
+				addProductWindow.add(addProductButton);
+				
+				addProductWindow.setVisible(true);
+			}
 				
 				// Attempt at getting confirmation before accepting the product
-			/*	JFrame addProductConfirmation = new JFrame();
-				addProductConfirmation.setLocation(350, 350);
-				addProductConfirmation.setSize(150, 100);
-				addProductConfirmation.add(new JLabel("Add the product: "));
-				addProductConfirmation.setLayout(new GridLayout(1,2));
-				addProductConfirmation.add(new JButton("Yes"));
-				addProductConfirmation.add(new JButton("No"));
-				addProductConfirmation.setVisible(true); 
-				//find positioning in here somewhere
-			*/
-			}
+			
 		});
-		
+
+	
 		
 		findByName.addActionListener(new ActionListener() {
 			
