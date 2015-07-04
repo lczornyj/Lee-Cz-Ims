@@ -89,6 +89,9 @@ public class MainMenu {
 			search.newSearch(products);
 			menuOptions();
 			break;
+		case "Discontinue product":
+			
+			break;
 		case "end": 
 			System.out.println("I want to end");
 			break;
