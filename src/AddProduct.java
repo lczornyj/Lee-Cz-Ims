@@ -28,7 +28,7 @@ public class AddProduct {
 		System.out.print("What is the name of the product you wish to add? ");
 		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
-		String name = in.next();
+		String name = in.nextLine();
 		//duplicates
 		boolean exsistes = false;
 		for(Product p : products) {

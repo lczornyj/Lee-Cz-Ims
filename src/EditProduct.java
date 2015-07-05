@@ -57,7 +57,7 @@ public class EditProduct {
 		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		System.out.print("What is the products new name? ");
-		String name = in.next();
+		String name = in.nextLine();
 		product.setName(name);
 		products.set(findIndexOf(product), product);
 	}

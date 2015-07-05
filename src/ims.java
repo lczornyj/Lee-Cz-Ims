@@ -5,8 +5,10 @@ public class ims {
 
 		//@SuppressWarnings("unused")
 		//MainMenu mainMenu = new MainMenu();
-		//mainMenu.runthread();
-		new ImsGUI();
+		
+		DatabaseConnection dbc = new DatabaseConnection();
+		dbc.accessBD();
+		//new ImsGUI();
 	}
 	
 }

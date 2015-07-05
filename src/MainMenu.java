@@ -58,8 +58,9 @@ public class MainMenu {
 		File file = new File(fileLocation + nameOfFile+"" + fileversiron + ".txt");
 		
 		displayHelp.displayMenuItems();
-			
+		
 		menuOptions();
+		fileWritingMethod();
 	}
 	
 	/**

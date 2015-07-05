@@ -68,7 +68,7 @@ public class ImsGUI extends JFrame implements ActionListener {
 				JFrame addProductWindow = new JFrame();
 				addProductWindow.setLocation(500,300);
 				addProductWindow.setSize(300, 150);
-				addProductWindow.setLayout(new GridLayout(3,2));
+				addProductWindow.setLayout(new GridLayout(3,2, 5, 5));
 				addProductWindow.setTitle("Add new product");
 				addProductWindow.add(new JLabel("Enter product name:"));
 				addProductWindow.add(new JTextField());
@@ -249,18 +249,19 @@ public class ImsGUI extends JFrame implements ActionListener {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						int dialogButton = JOptionPane.showConfirmDialog (null, "Is this the name? ","Confirmation",JOptionPane.YES_NO_OPTION);if (dialogButton == JOptionPane.YES_OPTION){
+						int dialogButton = JOptionPane.showConfirmDialog (null, "Is this the name? ","Confirmation",JOptionPane.YES_NO_OPTION);
+						if (dialogButton == JOptionPane.YES_OPTION){
 		                	editStockWindow.dispose();
 		        
-		                	JFrame newNameWindow = new JFrame();
-		                	newNameWindow.setTitle("Edit Product");
-		                	newNameWindow.setLayout(new GridLayout (2,2));
-		                	newNameWindow.add(new JLabel(" Enter new stock ammount: "));
-		                	newNameWindow.add(new JTextField());
-		                	newNameWindow.add(new JPanel());
-		                	newNameWindow.setLocation(500,300);
-		    				newNameWindow.setSize(300, 100);
-		    				newNameWindow.setVisible(true);
+		                	JFrame newStockWindow = new JFrame();
+		                	newStockWindow.setTitle("Edit Product");
+		                	newStockWindow.setLayout(new GridLayout (2,2));
+		                	newStockWindow.add(new JLabel(" Enter new stock ammount: "));
+		                	newStockWindow.add(new JTextField());
+		                	newStockWindow.add(new JPanel());
+		                	newStockWindow.setLocation(500,300);
+		    				newStockWindow.setSize(300, 100);
+		    				newStockWindow.setVisible(true);
 		    			
 		    				JButton confirmEditButton = new JButton("Confirm");
 		    				
@@ -268,20 +269,20 @@ public class ImsGUI extends JFrame implements ActionListener {
 								
 								@Override
 								public void actionPerformed(ActionEvent e) {
-									int dialogButton = JOptionPane.showConfirmDialog (null, "Is this the name? ","Confirmation",JOptionPane.YES_NO_OPTION);
+									int dialogButton = JOptionPane.showConfirmDialog (null, "New stock amount: ","Confirmation",JOptionPane.PLAIN_MESSAGE);
 						               if (dialogButton == JOptionPane.YES_OPTION){
-						            	   	newNameWindow.dispose();		                	
+						            	   	newStockWindow.dispose();		                	
 						                }
 								}
 							});
-		    				newNameWindow.add(confirmEditButton);
-		    				newNameWindow.setVisible(true);
+		    				newStockWindow.add(confirmEditButton);
+		    				newStockWindow.setVisible(true);
 		                }
 					}
 				});
 				
-				editStockWindow.add(cancelButton);
 				editStockWindow.add(editStockButton);
+				editStockWindow.add(cancelButton);
 				editStockWindow.setVisible(true);
 			
 			}
@@ -303,20 +304,29 @@ public class ImsGUI extends JFrame implements ActionListener {
 				discontinuedWindow.setLocation(500,300);
 				discontinuedWindow.setSize(300, 150);
 				discontinuedWindow.setLayout(new GridLayout(3,2,5,5));
-				discontinuedWindow.setTitle("Search");
+				discontinuedWindow.setTitle("Discontinue");
 				discontinuedWindow.add(new JLabel("Enter product name: "));
 				discontinuedWindow.add(new JTextField());
 				discontinuedWindow.add(new JLabel("Enter product ID: "));
 				discontinuedWindow.add(new JTextField());
 				setPreferredSize( new Dimension( 200, 24 ) );
 				
-				JButton addProductButton = new JButton("Find product");
+				JButton addProductButton = new JButton("Discontinue");
+				JButton cancelButton = new JButton("Cancel");
+				
+				cancelButton.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						discontinuedWindow.dispose();
+					}	
+				});
+				
 				addProductButton.addActionListener(new ActionListener() {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						int dialogButton = JOptionPane.YES_NO_OPTION;
-		                JOptionPane.showConfirmDialog (null, "Is this the product you were looking for?","Search",dialogButton);
+		                JOptionPane.showConfirmDialog (null, "Discontinue this product? ","Discontinue",dialogButton);
 		                if (dialogButton == JOptionPane.YES_OPTION){
 		                	discontinuedWindow.dispose();
 		                }
@@ -325,7 +335,7 @@ public class ImsGUI extends JFrame implements ActionListener {
 				});
 				
 				discontinuedWindow.add(addProductButton);
-				
+				discontinuedWindow.add(cancelButton);
 				discontinuedWindow.setVisible(true);
 				
 			}

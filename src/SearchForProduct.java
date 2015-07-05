@@ -33,7 +33,7 @@ public class SearchForProduct {
 		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		System.out.print("What is the products name? ");
-		String name = in.next();
+		String name = in.nextLine();
 			for(Product p : products) {
 				//System.out.println(p.getName() + " : " + name);
 
