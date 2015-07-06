@@ -7,8 +7,15 @@ public class ims {
 		//MainMenu mainMenu = new MainMenu();
 		
 		DatabaseConnection dbc = new DatabaseConnection();
-		dbc.accessBD();
+		
 		//new ImsGUI();
+		//dbc.createEntry();
+		
+		//dbc.readEntry();
+		//dbc.updateEntry();
+		
+		dbc.closeConnection();
+		
 	}
 	
 }
