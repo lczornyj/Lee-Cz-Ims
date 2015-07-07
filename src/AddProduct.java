@@ -1,4 +1,4 @@
-
+	
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 
 public class AddProduct {
-
+	DatabaseConnection dbc = new DatabaseConnection();
 	/**
 	 * This method is designed so that a user can add a new item into the list.
 	 * When the user is typing in a name, the name cannot contain any numbers, punctuation or spaces inbetween names.
@@ -37,16 +37,19 @@ public class AddProduct {
 		}
 		if (!exsistes){
 			System.out.print("How many items of the product do you wish to add? ");
-			int lvl = in.nextInt();
+			int stockLevel = in.nextInt();
 			int numberOfProducts = products.size();
-			Product product = new Product(name,numberOfProducts,lvl);
+			Product product = new Product(numberOfProducts,name,stockLevel);
 			products.add(product);
+			dbc.createEntry(numberOfProducts, name, stockLevel);
 			
 		}
 		else {
 			System.out.println("Item already exsists");
 			products = addProduct(products);
 		}
+		
+		
 		return products;
 	}
 }

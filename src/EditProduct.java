@@ -1,4 +1,4 @@
-
+	
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -12,6 +12,7 @@ public class EditProduct {
 	private SearchForProduct search = new SearchForProduct();
 	private ArrayList<Product> products;
 	private Product product;
+	DatabaseConnection dbc = new DatabaseConnection();
 	/**
 	 * This method is designed to determine whether or not a user wants to edit a product or not.
 	 * @param products
@@ -60,6 +61,8 @@ public class EditProduct {
 		String name = in.nextLine();
 		product.setName(name);
 		products.set(findIndexOf(product), product);
+		
+		dbc.updateEntry(findIndexOf(product), name, -1);
 	}
 /**
  * This is the editStock method, it requires the user to input a new stock level for the product, and then saves that new quantity for the product.
@@ -73,6 +76,7 @@ public class EditProduct {
 		int stock = in.nextInt();
 		product.setStock(stock);
 		products.set(findIndexOf(product), product);
+		dbc.updateEntry(findIndexOf(product), "string", stock);
 	}
 	/**
 	 * This method locates the original products id based off of the product that was searched at the start of the class.

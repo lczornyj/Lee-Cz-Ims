@@ -28,6 +28,7 @@ public class MainMenu {
 	private ArrayList<Product> products = new ArrayList<Product>();
 	private String nameOfFile;
 	private int fileversiron = 0;
+	private DatabaseConnection dbc;
 	/**
 	 * The main method which is the central controller of the IMS created.
 	 * This contains all commands used to initialise the programme along with the construction
@@ -47,7 +48,10 @@ public class MainMenu {
 	//	}
 	//}
 	
-	public MainMenu() {
+	public MainMenu(DatabaseConnection dbc) {
+		this.dbc = dbc;
+		dbc.readEntry();
+		products = dbc.getProducts();
 		
 		System.out.print("Enter the files location: ");
 		Scanner in = new Scanner(System.in);
@@ -56,7 +60,6 @@ public class MainMenu {
 		Scanner user = new Scanner(System.in);
 		nameOfFile = user.nextLine().toLowerCase();
 		File file = new File(fileLocation + nameOfFile+"" + fileversiron + ".txt");
-		
 		displayHelp.displayMenuItems();
 		
 		menuOptions();
@@ -80,13 +83,16 @@ public class MainMenu {
 			break;
 		case "add": 
 			products = add.addProduct(products);
+			fileWritingMethod();
 			menuOptions();
 			break;
 		case "edit":
 			products = edit.newEdit(products);
+			fileWritingMethod();
 			menuOptions();
 			break;
 		case "search":
+			System.out.println(products.get(0));
 			search.newSearch(products);
 			menuOptions();
 			break;

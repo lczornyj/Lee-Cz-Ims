@@ -6,7 +6,7 @@ public class Product {
 	private int productid;
 	private int stock;
 	
-	public Product(String name, int productid, int lvl)
+	public Product(int productid,String name, int lvl)
 	{
 		this.name = name;
 		this.stock = lvl;

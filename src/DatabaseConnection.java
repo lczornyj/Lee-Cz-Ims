@@ -1,5 +1,6 @@
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DatabaseConnection {
 	
@@ -9,8 +10,10 @@ public class DatabaseConnection {
 	 static final String PASS = "Chutney2000";
 	 static Connection conn = null;
 	 static Statement stmt = null;
+	 private ArrayList<Product> products;
 	 
 	 public DatabaseConnection() { 
+		 products = new ArrayList<Product>();
 		 openConnection();
 		
 	 }
@@ -25,12 +28,11 @@ public class DatabaseConnection {
 		}
 	 }
 	 
-	 public void createEntry() {
+	 public void createEntry(int numberOfProducts, String name, int stockLevel) {
 		 try { 
 		 System.out.println("Inserting records into the table..."); 
-		 int ID = 5; String ProductName = "Jake Gnome"; int StockAmount = 16;
 		 stmt = conn.createStatement();
-		 String sql = "INSERT INTO imsdatabase VALUES ("+ID+", '" +ProductName+ "', " + StockAmount+ ")";
+		 String sql = "INSERT INTO imsdatabase VALUES ("+numberOfProducts+", '" +name+ "', " + stockLevel+ ")";
 		 System.out.println(sql);
 		 stmt.executeUpdate(sql);
 		 System.out.println("Inserted records into the table...");
@@ -51,25 +53,30 @@ public class DatabaseConnection {
 		 ResultSet rs = stmt.executeQuery(sql2); 
 		 
 		 	while (rs.next()) { 
-		 		int ID = rs.getInt("ID");
-		 		String Product = rs.getString("Name");
-		 		int Stock = rs.getInt("Stock");
-		 		System.out.println("Product ID: " + ID + ", Product Name: " + Product + ", Stock Amount: " + Stock);
+		 		products.add(new Product(rs.getInt("ID"), rs.getString("Name"),  rs.getInt("Stock")));
 		 		}
+		 	for(Product pr : products){
+		 		System.out.println("Product ID: " + pr.getproductid() + ", Product Name: " + pr.getName() + ", Stock Amount: " + pr.getStock());
+		 	}
 		 	rs.close();
 		 } catch (SQLException e) {
 			 e.printStackTrace();
 		 }
 	 }
 	 
-	 public void updateEntry(){
+	 public void updateEntry(int findProductIndex, String name, int StockLevel){
+		 String sql3="";
 		 System.out.println("Creating statement...");
 		 	try {
 				stmt = conn.createStatement();
 			
-				
+			if(StockLevel==-1){
+			  		 	sql3 =  "UPDATE imsdatabase SET Name = name WHERE ID =" + findProductIndex;
+				}else if(StockLevel>=0){
+						sql3 =  "UPDATE imsdatabase SET Stock = StockLevel WHERE ID =" + findProductIndex;
+				}	
 			
-		 	String sql3 =  "UPDATE imsdatabase SET Stock = 100 WHERE ID = 2";
+		 	//String sql3 =  "UPDATE imsdatabase SET Stock = 100 WHERE ID =" + findProductIndex;
 		 	stmt.executeUpdate(sql3);
 		 	} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -77,11 +84,8 @@ public class DatabaseConnection {
 		 	}
 	 }
 	 
-
 	 public void closeConnection() {
-	
 
-	 
 		 try { 
 			 if (stmt != null)    conn.close();  
 		 	}
@@ -93,9 +97,15 @@ public class DatabaseConnection {
 		se.printStackTrace(); 
 			}
 		 System.out.println("Goodbye!"); 
-		} 
+	}
 	 
-	
+	 public ArrayList<Product> getProducts(){
+		 return products;
+	 }
+	 
+	 public int getArraySize(){
+		 return products.size();
+	 }
 }
 
 

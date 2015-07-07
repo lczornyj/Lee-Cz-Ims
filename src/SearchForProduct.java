@@ -19,8 +19,10 @@ public class SearchForProduct {
 		Scanner in = new Scanner(System.in);
 		System.out.print("Do you wish to search by name / ID? ");
 		String command = in.next();
-		if(command.equals("name"))
+		if(command.equals("name")){
 			return nameSearch(products);
+		}
+		System.out.println(products.get(0));
 		return idSearch(products);
 	}
 	/**
@@ -34,8 +36,9 @@ public class SearchForProduct {
 		Scanner in = new Scanner(System.in);
 		System.out.print("What is the products name? ");
 		String name = in.nextLine();
+		
 			for(Product p : products) {
-				//System.out.println(p.getName() + " : " + name);
+
 
 				if (p.getName().equalsIgnoreCase(name)) {
 					System.out.println(p.getName() + ", " + p.getproductid() + ", " + p.getStock());
