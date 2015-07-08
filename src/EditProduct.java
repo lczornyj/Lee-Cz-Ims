@@ -42,13 +42,13 @@ public class EditProduct {
 		String type = in.next();
 		if(type.equalsIgnoreCase("name")){
 			editName();
-		System.out.println(product.getName() + ", " + product.getproductid() + ", " + product.getStock());}
+		System.out.println("ID: " +product.getproductid() + ", Name: " + product.getName() + ", Stock Level:  " + product.getStock());}
 
 		else {
 			editStock();
-			System.out.println(product.getName() + ", " + product.getproductid() + ", " + product.getStock());	
+			System.out.println("ID: " +product.getproductid() + ", Name: " + product.getName() + ", Stock Level:  " + product.getStock());}
 		}
-	}
+	
 /**
  * This is the editName method, it requires the user to input a new name for the product, and then saves that new name for the product.
  * From here it then finds the original product in the ArrayList using the findIndexOf method and changes the name to what was typed.
@@ -61,7 +61,6 @@ public class EditProduct {
 		String name = in.nextLine();
 		product.setName(name);
 		products.set(findIndexOf(product), product);
-		
 		dbc.updateEntry(findIndexOf(product), name, -1);
 	}
 /**

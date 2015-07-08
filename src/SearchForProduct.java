@@ -9,6 +9,7 @@ import java.util.Scanner;
  */
 
 public class SearchForProduct {
+	DatabaseConnection dbc = new DatabaseConnection();
 	/**
 	 * newSearch is designed for the user to decide by which attribute they want to search for.
 	 * @param products
@@ -22,7 +23,6 @@ public class SearchForProduct {
 		if(command.equals("name")){
 			return nameSearch(products);
 		}
-		System.out.println(products.get(0));
 		return idSearch(products);
 	}
 	/**
@@ -41,7 +41,7 @@ public class SearchForProduct {
 
 
 				if (p.getName().equalsIgnoreCase(name)) {
-					System.out.println(p.getName() + ", " + p.getproductid() + ", " + p.getStock());
+					System.out.println("ID:"+ p.getproductid() + ", Name: " + p.getName() + ",Stock Level: " + p.getStock());
 					return p;
 				}
 			}
@@ -59,9 +59,11 @@ public class SearchForProduct {
 		System.out.print("What is the products ID number? ");
 		int id = in.nextInt();
 			for(Product p : products) {
-				if (p.getproductid() == id)
-					System.out.println(p.getName() + ", " + p.getproductid() + ", " + p.getStock());
-					return p;			
+				if (p.getproductid() == id){
+					System.out.println("ID: " +p.getproductid()+ ", Name: " + p.getName() + ", Stock level " + p.getStock());
+					return p;		
+				}
+			
 			}
 			return null;
 	}

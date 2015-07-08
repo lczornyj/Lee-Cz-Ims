@@ -52,7 +52,6 @@ public class MainMenu {
 		this.dbc = dbc;
 		dbc.readEntry();
 		products = dbc.getProducts();
-		
 		System.out.print("Enter the files location: ");
 		Scanner in = new Scanner(System.in);
 		fileLocation = in.nextLine().trim().toLowerCase();
@@ -92,7 +91,6 @@ public class MainMenu {
 			menuOptions();
 			break;
 		case "search":
-			System.out.println(products.get(0));
 			search.newSearch(products);
 			menuOptions();
 			break;
@@ -101,6 +99,7 @@ public class MainMenu {
 			break;
 		case "end": 
 			System.out.println("I want to end");
+			dbc.closeConnection();
 			break;
 			
 		}

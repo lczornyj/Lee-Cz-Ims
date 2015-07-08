@@ -55,33 +55,42 @@ public class DatabaseConnection {
 		 	while (rs.next()) { 
 		 		products.add(new Product(rs.getInt("ID"), rs.getString("Name"),  rs.getInt("Stock")));
 		 		}
-		 	for(Product pr : products){
+		 	/*for(Product pr : products){
 		 		System.out.println("Product ID: " + pr.getproductid() + ", Product Name: " + pr.getName() + ", Stock Amount: " + pr.getStock());
-		 	}
+		 	}*/
 		 	rs.close();
 		 } catch (SQLException e) {
 			 e.printStackTrace();
 		 }
 	 }
 	 
-	 public void updateEntry(int findProductIndex, String name, int StockLevel){
+	 public void updateEntry(int findProductIndex, String name, int stock){
 		 String sql3="";
+		 
+			if(stock==-1){
+	  		 	sql3 =  "UPDATE imsdatabase SET Name = '" +  name  + "' WHERE ID = " + findProductIndex;
+	  		 	
+	
 		 System.out.println("Creating statement...");
-		 	try {
-				stmt = conn.createStatement();
-			
-			if(StockLevel==-1){
-			  		 	sql3 =  "UPDATE imsdatabase SET Name = name WHERE ID =" + findProductIndex;
-				}else if(StockLevel>=0){
-						sql3 =  "UPDATE imsdatabase SET Stock = StockLevel WHERE ID =" + findProductIndex;
-				}	
-			
-		 	//String sql3 =  "UPDATE imsdatabase SET Stock = 100 WHERE ID =" + findProductIndex;
+		 try {
+			stmt = conn.createStatement();	
 		 	stmt.executeUpdate(sql3);
 		 	} catch (SQLException e) {
 			// TODO Auto-generated catch block
 		 		e.printStackTrace();
 		 	}
+			}else{
+		 
+			 	try {
+			 		stmt = conn.createStatement();
+				  	sql3 =  "UPDATE imsdatabase SET Stock = " + stock + " WHERE ID = " + findProductIndex;
+			 	stmt.executeUpdate(sql3);
+			 	} catch (SQLException e) {
+				// TODO Auto-generated catch block
+			 		e.printStackTrace();
+			 	}
+		 	
+			}
 	 }
 	 
 	 public void closeConnection() {
