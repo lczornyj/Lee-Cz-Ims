@@ -12,7 +12,8 @@ public class ImsGUI extends JFrame implements ActionListener {
 	private JMenuBar menu = new JMenuBar();
 	private JLabel statusLabel;
 	private JFrame frame;
-	
+	static JTextField textField_productName = new JTextField();
+	static JTextField textField_productStock = new JTextField();
 		
 	public ImsGUI () {
 		
@@ -71,9 +72,11 @@ public class ImsGUI extends JFrame implements ActionListener {
 				addProductWindow.setLayout(new GridLayout(3,2, 5, 5));
 				addProductWindow.setTitle("Add new product");
 				addProductWindow.add(new JLabel("Enter product name:"));
-				addProductWindow.add(new JTextField());
+				addProductWindow.add(textField_productName);				
+				textField_productName.getText();
 				addProductWindow.add(new JLabel("Enter Initial stock:"));
-				addProductWindow.add(new JTextField());
+				addProductWindow.add(textField_productStock);
+				textField_productStock.getText();
 				JButton addProductButton = new JButton("Add Product");
 				JButton cancelButton = new JButton("cancel");
 				/* input here

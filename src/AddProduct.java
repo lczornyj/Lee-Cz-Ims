@@ -27,8 +27,8 @@ public class AddProduct {
 	public ArrayList<Product> addProduct(ArrayList<Product> products) {	
 		System.out.print("What is the name of the product you wish to add? ");
 		@SuppressWarnings("resource")
-		Scanner in = new Scanner(System.in);
-		String name = in.nextLine();
+		
+		String name = ImsGUI.textField_productName.getText();
 		//duplicates
 		boolean exsistes = false;
 		for(Product p : products) {
@@ -37,7 +37,7 @@ public class AddProduct {
 		}
 		if (!exsistes){
 			System.out.print("How many items of the product do you wish to add? ");
-			int stockLevel = in.nextInt();
+			int stockLevel = ImsGUI.textField_productStock.get;
 			int numberOfProducts = products.size();
 			Product product = new Product(numberOfProducts,name,stockLevel);
 			products.add(product);
