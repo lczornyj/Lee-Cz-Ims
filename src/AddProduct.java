@@ -37,6 +37,10 @@ public class AddProduct {
 		}
 		if (!exsistes){
 			System.out.print("How many items of the product do you wish to add? ");
+			
+			
+			////////////////// FINISH ADDING PRODUCT VIA GUI!! ///////////
+			
 			int stockLevel = ImsGUI.textField_productStock.get;
 			int numberOfProducts = products.size();
 			Product product = new Product(numberOfProducts,name,stockLevel);
