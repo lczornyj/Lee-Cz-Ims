@@ -27,8 +27,9 @@ public class MainMenu {
 	private EditProduct edit = new EditProduct();
 	private ArrayList<Product> products = new ArrayList<Product>();
 	private String nameOfFile;
-	private int fileversiron = 0;
+	private int fileversion = 0;
 	private DatabaseConnection dbc;
+	private String programDirectory = System.getProperty("user.dir");
 	/**
 	 * The main method which is the central controller of the IMS created.
 	 * This contains all commands used to initialise the programme along with the construction
@@ -51,14 +52,11 @@ public class MainMenu {
 	public MainMenu(DatabaseConnection dbc) {
 		this.dbc = dbc;
 		dbc.readEntry();
-		products = dbc.getProducts();
-		System.out.print("Enter the files location: ");
-		Scanner in = new Scanner(System.in);
-		fileLocation = in.nextLine().trim().toLowerCase();
-		System.out.print("What is the files name? ");
-		Scanner user = new Scanner(System.in);
-		nameOfFile = user.nextLine().toLowerCase();
-		File file = new File(fileLocation + nameOfFile+"" + fileversiron + ".txt");
+		products = DatabaseConnection.getProducts();
+
+
+	
+		File file = new File(programDirectory);
 		displayHelp.displayMenuItems();
 		
 		menuOptions();
@@ -114,7 +112,7 @@ public class MainMenu {
 	public void fileWritingMethod() {
 		Calendar rightNow = Calendar.getInstance();
 		try {
-		File file = new File(fileLocation + nameOfFile+"" + fileversiron + ".txt");
+		File file = new File(programDirectory+".txt");
 		DataOutputStream datawriting = new DataOutputStream(new FileOutputStream(file));
 		datawriting.writeUTF("*** STOCK  REPORT *** \r\n\r\n");
 		datawriting.writeUTF("Product   ID   Stock level \r\n");
@@ -167,7 +165,7 @@ public class MainMenu {
 	}
 	// work in progress for decrement along side the main method.
 	public void calculations(int numberGenerator) {
-		for (int i = 0; i<1000000000; ++i){
+		for (int i = 0; i<100; ++i){
 			try {
 				numberGenerator();
 				Thread.sleep(5000);

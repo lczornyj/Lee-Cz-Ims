@@ -6,10 +6,10 @@ public class ims {
 		//@SuppressWarnings("unused")		
 		DatabaseConnection dbc = new DatabaseConnection();
 		dbc.getProducts();
+		new ImsGUI();
 		
 		MainMenu mainMenu = new MainMenu(dbc);
 		
-		//new ImsGUI();
 		//dbc.readEntry();
 		//dbc.updateEntry();
 		

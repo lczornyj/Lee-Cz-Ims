@@ -5,12 +5,14 @@ import java.util.ArrayList;
 public class DatabaseConnection {
 	
 	 static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	 static final String DB_URL = "jdbc:mysql://10.50.15.30:3306/mydb";  
+	 //static final String DB_URL = "jdbc:mysql://10.50.15.30:3306/mydb";  
+	 static final String DB_URL = "jdbc:mysql://localhost:3306/mydb";  
 	 static final String USER = "LC";  
 	 static final String PASS = "Chutney2000";
 	 static Connection conn = null;
 	 static Statement stmt = null;
-	 private ArrayList<Product> products;
+	 private static ArrayList<Product> products;
+	 
 	 
 	 public DatabaseConnection() { 
 		 products = new ArrayList<Product>();
@@ -30,10 +32,10 @@ public class DatabaseConnection {
 	 
 	 public void createEntry(int numberOfProducts, String name, int stockLevel) {
 		 try { 
-		 System.out.println("Inserting records into the table..."); 
+		 //System.out.println("Inserting records into the table..."); 
 		 stmt = conn.createStatement();
-		 String sql = "INSERT INTO imsdatabase VALUES ("+numberOfProducts+", '" +name+ "', " + stockLevel+ ")";
-		 System.out.println(sql);
+		 String sql = "INSERT INTO imsdatabase (Name, Stock) VALUES ('"+ name + "', " + stockLevel+ ")";
+		 //System.out.println(sql);
 		 stmt.executeUpdate(sql);
 		 System.out.println("Inserted records into the table...");
 		} catch (SQLException e) {
@@ -108,7 +110,7 @@ public class DatabaseConnection {
 		 System.out.println("Goodbye!"); 
 	}
 	 
-	 public ArrayList<Product> getProducts(){
+	 public static ArrayList<Product> getProducts(){
 		 return products;
 	 }
 	 

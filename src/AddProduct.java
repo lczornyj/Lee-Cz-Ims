@@ -25,32 +25,26 @@ public class AddProduct {
 	 */
 
 	public ArrayList<Product> addProduct(ArrayList<Product> products) {	
-		System.out.print("What is the name of the product you wish to add? ");
-		@SuppressWarnings("resource")
-		
-		String name = ImsGUI.textField_productName.getText();
+		@SuppressWarnings("resource")	
+		String name = products.get(0).getName();//ImsGUI.textField_productName.getText();
 		//duplicates
 		boolean exsistes = false;
-		for(Product p : products) {
+		for(Product p : dbc.getProducts()) {
 			if (p.getName().equalsIgnoreCase(name))
 				exsistes = true;
 		}
 		if (!exsistes){
-			System.out.print("How many items of the product do you wish to add? ");
-			
-			
 			////////////////// FINISH ADDING PRODUCT VIA GUI!! ///////////
-			
-			int stockLevel = ImsGUI.textField_productStock.get;
+			int stockLevel = Integer.parseInt(ImsGUI.textField_productStock.getText());
 			int numberOfProducts = products.size();
 			Product product = new Product(numberOfProducts,name,stockLevel);
+			
 			products.add(product);
 			dbc.createEntry(numberOfProducts, name, stockLevel);
-			
 		}
 		else {
 			System.out.println("Item already exsists");
-			products = addProduct(products);
+			//products = addProduct(products);
 		}
 		
 		

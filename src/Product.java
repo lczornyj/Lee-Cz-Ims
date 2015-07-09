@@ -35,5 +35,12 @@ public class Product {
 		stringA = this.name;
 		return stringA;
 	}
-	
+ 	public Object[] ObjectArray()
+		{
+			Object[] returnValue = new Object[3];
+			returnValue[0] = getproductid();
+			returnValue[1] = getName();
+			returnValue[2] = getStock();
+			return returnValue;
+		}
 }

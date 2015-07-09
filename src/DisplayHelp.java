@@ -17,8 +17,7 @@ public class DisplayHelp {
 		System.out.println("3. Search - Searches for a new product ");
 		System.out.println("4. Edit - Allows the editing of a current product ");
 		System.out.println("5. End - Terminates the IMS !WARNING THIS WILL CLOSE THE PROGRAM ");
-		System.out.println(" ");
-		System.out.print("Please enter one of the commands: ");
+		
 	}
 	
 }

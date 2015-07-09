@@ -1,25 +1,39 @@
 
-import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.awt.*;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 
 
 public class ImsGUI extends JFrame implements ActionListener {
 	private JMenuBar menu = new JMenuBar();
 	private JLabel statusLabel;
-	private JFrame frame;
+	private static JFrame frame;
 	static JTextField textField_productName = new JTextField();
 	static JTextField textField_productStock = new JTextField();
-		
+	static JTextField textField_findProductByName = new JTextField();
+	static JTextField textField_findProductById = new JTextField();
+	private static DefaultTableModel tableModel;
+	static String [] columnNames = {"Product ID","Product Name","Stock Level" };
+	static String[][] table = new String[0][3];
+	
+	
 	public ImsGUI () {
 		
 		
 		setLayout(new FlowLayout());
 		frame = new JFrame("Inventory Management System");
+		
+		
+		
+		
+		
+		refreshTable();	
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		frame.setJMenuBar(menu);
@@ -29,6 +43,27 @@ public class ImsGUI extends JFrame implements ActionListener {
 		frame.setLocation(300, 100);
 		frame.setVisible(true);
 		
+	}
+	
+	public static void refreshTable(){
+		tableModel = new DefaultTableModel(table, columnNames);
+		JTable table1 = new JTable(tableModel);
+		JScrollPane scrollPane = new JScrollPane(table1);
+		
+		Container tempContainer = frame.getContentPane();
+		tempContainer.removeAll();
+		tempContainer.add(scrollPane,BorderLayout.CENTER);
+		frame.setContentPane(tempContainer);
+		DatabaseConnection dbc = new DatabaseConnection();
+		dbc.readEntry();
+		
+		//tableModel = new DefaultTableModel(table, columnNames);
+		for(Product product : DatabaseConnection.getProducts())
+		 {
+			tableModel.addRow(product.ObjectArray()); 
+		 }
+
+		frame.setVisible(true);
 	}
 	
 	public void createMainMenu () {
@@ -47,7 +82,6 @@ public class ImsGUI extends JFrame implements ActionListener {
 		JMenuItem editProductName = new JMenuItem("Edit product name");
 		JMenuItem editProductStock = new JMenuItem("Edit product stock level");
 		JMenuItem timeSimulation = new JMenuItem("Simulate sales");
-		JMenuItem discontinued = new JMenuItem("Discontinue product");
 		
 		editProduct.add(editProductName);
 		editProduct.add(editProductStock);
@@ -55,7 +89,6 @@ public class ImsGUI extends JFrame implements ActionListener {
 		file.add(findProduct);
 		file.add(editProduct);
 		file.add(timeSimulation);
-		file.add(discontinued);
 		
 		//add buttons
 		//add(addProduct); add(findByName); add(findByID); add(editProductName); add(editProductStock); add(timeSimulation); add(discontinued);
@@ -94,8 +127,15 @@ public class ImsGUI extends JFrame implements ActionListener {
 				addProductButton.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						int dialogButton = JOptionPane.showConfirmDialog (null, "Do you want to add Product: ","Confirmation",JOptionPane.YES_NO_OPTION);
+						int dialogButton = JOptionPane.showConfirmDialog (null, "Do you want to add Product: " + textField_productName.getText(),"Confirmation",JOptionPane.YES_NO_OPTION);
 		               if (dialogButton == JOptionPane.YES_OPTION){
+		            	   	AddProduct ap = new AddProduct();
+		            	   	ArrayList<Product> alp = new ArrayList<Product>();
+		            	   	
+		            	   	alp.add(new Product(DatabaseConnection.getProducts().size(),textField_productName.getText(),Integer.parseInt(textField_productStock.getText())));
+		            	   	
+		            	   	ap.addProduct(alp);
+		            	   	refreshTable();
 		            	   	addProductWindow.dispose();		                	
 		                } 
 					}	
@@ -117,9 +157,11 @@ public class ImsGUI extends JFrame implements ActionListener {
 				findProductWindow.setLayout(new GridLayout(3,2,5,5));
 				findProductWindow.setTitle("Search");
 				findProductWindow.add(new JLabel("Enter product name: "));
-				findProductWindow.add(new JTextField());
+				findProductWindow.add(textField_findProductByName);				
+				textField_findProductByName.getText();
 				findProductWindow.add(new JLabel("Enter product ID: "));
-				findProductWindow.add(new JTextField());
+				findProductWindow.add(textField_findProductById);				
+				textField_findProductById.getText();
 
 				setPreferredSize( new Dimension( 200, 24 ) );
 				JButton findProductButton = new JButton("Find product");
@@ -128,6 +170,7 @@ public class ImsGUI extends JFrame implements ActionListener {
 				cancelButton.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						
 						findProductWindow.dispose();
 					}	
 				});
@@ -136,11 +179,13 @@ public class ImsGUI extends JFrame implements ActionListener {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						int dialogButton = JOptionPane.showConfirmDialog (null, "Product: ","Confirmation",JOptionPane.YES_NO_OPTION);
+						
+						int dialogButton = JOptionPane.showConfirmDialog (null, "Is this the product?" , "Confirmation",JOptionPane.YES_NO_OPTION);
 		                if (dialogButton == JOptionPane.YES_OPTION){
+		                	
 		                	findProductWindow.dispose();
 		                }
-		                //if()
+		                
 					}
 				});
 				
@@ -298,51 +343,8 @@ public class ImsGUI extends JFrame implements ActionListener {
 				
 			}
 		});
-		discontinued.addActionListener(new ActionListener() {
+				
 			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				JFrame discontinuedWindow = new JFrame();
-				discontinuedWindow.setLocation(500,300);
-				discontinuedWindow.setSize(300, 150);
-				discontinuedWindow.setLayout(new GridLayout(3,2,5,5));
-				discontinuedWindow.setTitle("Discontinue");
-				discontinuedWindow.add(new JLabel("Enter product name: "));
-				discontinuedWindow.add(new JTextField());
-				discontinuedWindow.add(new JLabel("Enter product ID: "));
-				discontinuedWindow.add(new JTextField());
-				setPreferredSize( new Dimension( 200, 24 ) );
-				
-				JButton addProductButton = new JButton("Discontinue");
-				JButton cancelButton = new JButton("Cancel");
-				
-				cancelButton.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						discontinuedWindow.dispose();
-					}	
-				});
-				
-				addProductButton.addActionListener(new ActionListener() {
-					
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						int dialogButton = JOptionPane.YES_NO_OPTION;
-		                JOptionPane.showConfirmDialog (null, "Discontinue this product? ","Discontinue",dialogButton);
-		                if (dialogButton == JOptionPane.YES_OPTION){
-		                	discontinuedWindow.dispose();
-		                }
-		                //if()
-					}
-				});
-				
-				discontinuedWindow.add(addProductButton);
-				discontinuedWindow.add(cancelButton);
-				discontinuedWindow.setVisible(true);
-				
-			}
-		});
 		
 		// add menu options for reports
 		JMenuItem showStockReport = new JMenuItem("Show stock report");
