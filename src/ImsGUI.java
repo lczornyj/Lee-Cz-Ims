@@ -19,7 +19,14 @@ public class ImsGUI extends JFrame implements ActionListener {
 	private static DefaultTableModel tableModel;
 	static String [] columnNames = {"Product ID","Product Name","Stock Level" };
 	static String[][] table = new String[0][3];
-	
+	JFrame addProductWindow = new JFrame();
+	JFrame findProductWindow = new JFrame();
+	JFrame editNameWindow = new JFrame();
+	JFrame editStockWindow = new JFrame();
+	JFrame newNameWindow = new JFrame();
+	JFrame newStockWindow = new JFrame();
+
+
 	
 	public ImsGUI () {
 		
@@ -99,7 +106,7 @@ public class ImsGUI extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				JFrame addProductWindow = new JFrame();
+				
 				addProductWindow.setLocation(500,300);
 				addProductWindow.setSize(300, 150);
 				addProductWindow.setLayout(new GridLayout(3,2, 5, 5));
@@ -151,7 +158,7 @@ public class ImsGUI extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				JFrame findProductWindow = new JFrame();
+				
 				findProductWindow.setLocation(500,300);
 				findProductWindow.setSize(300, 150);
 				findProductWindow.setLayout(new GridLayout(3,2,5,5));
@@ -203,7 +210,6 @@ public class ImsGUI extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				JFrame editNameWindow = new JFrame();
 				
 				editNameWindow.setLocation(500,300);
 				editNameWindow.setSize(375, 150);
@@ -233,7 +239,6 @@ public class ImsGUI extends JFrame implements ActionListener {
 		                if (dialogButton == JOptionPane.YES_OPTION){
 		                	editNameWindow.dispose();
 		                	
-		                	JFrame newNameWindow = new JFrame();
 		                	newNameWindow.setTitle("Edit Product");
 		                	newNameWindow.setLayout(new GridLayout (2,2));
 		                	newNameWindow.add(new JLabel(" Enter new name: "));
@@ -273,7 +278,6 @@ public class ImsGUI extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				JFrame editStockWindow = new JFrame();
 				editStockWindow.setLocation(500,300);
 				editStockWindow.setSize(300, 150);
 				editStockWindow.setLayout(new GridLayout(3,2,5,5));
@@ -303,7 +307,6 @@ public class ImsGUI extends JFrame implements ActionListener {
 						if (dialogButton == JOptionPane.YES_OPTION){
 		                	editStockWindow.dispose();
 		        
-		                	JFrame newStockWindow = new JFrame();
 		                	newStockWindow.setTitle("Edit Product");
 		                	newStockWindow.setLayout(new GridLayout (2,2));
 		                	newStockWindow.add(new JLabel(" Enter new stock ammount: "));
