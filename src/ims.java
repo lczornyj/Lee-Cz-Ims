@@ -5,7 +5,7 @@ public class ims {
 
 		//@SuppressWarnings("unused")		
 		DatabaseConnection dbc = new DatabaseConnection();
-		dbc.getProducts();
+		//dbc.getProducts();
 		new ImsGUI();
 		
 		//dbc.readEntry();

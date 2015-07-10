@@ -45,7 +45,7 @@ private ArrayList<Product> products = new ArrayList<Product>();
 	public MainMenu(DatabaseConnection dbc) {
 		dbc.readEntry();
 		products = DatabaseConnection.getProducts();
-		//fileWritingMethod();
+		
 	}
 	
 
@@ -105,7 +105,7 @@ private ArrayList<Product> products = new ArrayList<Product>();
 					adjustments = adjustments - randomDecrease;
 					}
 				products.get(stocknumber).setStock(adjustments);
-				//fileWritingMethod();
+				
 				int threshold = products.get(stocknumber).getStock();
 				if (threshold >= 25 && threshold <50){
 					System.out.println("product: " + products.get(stocknumber).getName() + " is low, reorder stock");

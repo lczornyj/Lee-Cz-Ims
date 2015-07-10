@@ -52,6 +52,7 @@ public class ImsGUI extends JFrame implements ActionListener {
 	}
 	
 	public static void refreshTable(){
+		
 		tableModel = new DefaultTableModel(table, columnNames);
 		JTable table1 = new JTable(tableModel);
 		JScrollPane scrollPane = new JScrollPane(table1);
@@ -62,13 +63,14 @@ public class ImsGUI extends JFrame implements ActionListener {
 		frame.setContentPane(tempContainer);
 		DatabaseConnection dbc = new DatabaseConnection();
 		dbc.readEntry();
-		MainMenu menu = new MainMenu(dbc);
-		//menu.fileWritingMethod();
+		
 		//tableModel = new DefaultTableModel(table, columnNames);
+		
 		for(Product product : DatabaseConnection.getProducts())
 		 {
 			tableModel.addRow(product.ObjectArray()); 
 		 }
+		 
 
 		frame.setVisible(true);
 	}
@@ -374,7 +376,6 @@ public class ImsGUI extends JFrame implements ActionListener {
 				File localfile = new File("\\desktop\\Stock_Report.txt");
 				DatabaseConnection dbc = new DatabaseConnection();
 				MainMenu menu = new MainMenu(dbc);
-				dbc.readEntry();
 				menu.fileWritingMethod();
 				menu.open(localfile);
 				}
