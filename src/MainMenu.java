@@ -45,7 +45,7 @@ private ArrayList<Product> products = new ArrayList<Product>();
 	public MainMenu(DatabaseConnection dbc) {
 		dbc.readEntry();
 		products = DatabaseConnection.getProducts();
-		fileWritingMethod();
+		//fileWritingMethod();
 	}
 	
 
@@ -56,14 +56,13 @@ private ArrayList<Product> products = new ArrayList<Product>();
 	 */
 		
 	
-	@SuppressWarnings("deprecation")
 	public void fileWritingMethod() {
 		Calendar rightNow = Calendar.getInstance();
 		try {
 		
 		DataOutputStream datawriting = new DataOutputStream(new FileOutputStream(file));
-		datawriting.writeUTF("*** STOCK  REPORT *** \r\n\r\n");
-		datawriting.writeUTF("ID\t\t\tProduct\t\t\tStock level \r\n");
+		datawriting.writeUTF("\t\t\t*** STOCK  REPORT *** \r\n\r\n");
+		datawriting.writeUTF("ID\t\t\tProduct\t\t\tStock level \r\n\r\n");
 		for (int i = 0; i < products.size(); ++i){
 			if(products.get(i).getName().length() > 15){
 				datawriting.writeUTF(products.get(i).getproductid() + "\t\t\t" + products.get(i).getName() + "\t\t" + products.get(i).getStock() + "\r\n");
@@ -106,7 +105,7 @@ private ArrayList<Product> products = new ArrayList<Product>();
 					adjustments = adjustments - randomDecrease;
 					}
 				products.get(stocknumber).setStock(adjustments);
-				fileWritingMethod();
+				//fileWritingMethod();
 				int threshold = products.get(stocknumber).getStock();
 				if (threshold >= 25 && threshold <50){
 					System.out.println("product: " + products.get(stocknumber).getName() + " is low, reorder stock");

@@ -56,7 +56,7 @@ public class ImsGUI extends JFrame implements ActionListener {
 		DatabaseConnection dbc = new DatabaseConnection();
 		dbc.readEntry();
 		MainMenu menu = new MainMenu(dbc);
-		menu.fileWritingMethod();
+		//menu.fileWritingMethod();
 		//tableModel = new DefaultTableModel(table, columnNames);
 		for(Product product : DatabaseConnection.getProducts())
 		 {
@@ -249,7 +249,7 @@ public class ImsGUI extends JFrame implements ActionListener {
 								
 								@Override
 								public void actionPerformed(ActionEvent e) {
-									int dialogButton = JOptionPane.showConfirmDialog (null, "Is this the name? ","Confirmation",JOptionPane.YES_NO_OPTION);
+									int dialogButton = JOptionPane.showConfirmDialog (null, "Is this the product? ","Confirmation",JOptionPane.YES_NO_OPTION);
 						               if (dialogButton == JOptionPane.YES_OPTION){
 						            	   	newNameWindow.dispose();		                	
 						                }
@@ -299,7 +299,7 @@ public class ImsGUI extends JFrame implements ActionListener {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						int dialogButton = JOptionPane.showConfirmDialog (null, "Is this the name? ","Confirmation",JOptionPane.YES_NO_OPTION);
+						int dialogButton = JOptionPane.showConfirmDialog (null, "Is this the product? ","Confirmation",JOptionPane.YES_NO_OPTION);
 						if (dialogButton == JOptionPane.YES_OPTION){
 		                	editStockWindow.dispose();
 		        
@@ -341,6 +341,12 @@ public class ImsGUI extends JFrame implements ActionListener {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				int dialogButton = JOptionPane.showConfirmDialog (null, "Do you want to run simulation? ","Confirmation",JOptionPane.YES_NO_OPTION);
+	               if (dialogButton == JOptionPane.YES_OPTION){
+	            	  /* DatabaseConnection dbc = new DatabaseConnection();
+	            	   MainMenu menu = new MainMenu(dbc);
+	            	   menu.calculations(numberGenerator);*/
+	                }
 				
 				
 			}
@@ -365,6 +371,8 @@ public class ImsGUI extends JFrame implements ActionListener {
 				File localfile = new File("\\desktop\\Stock_Report.txt");
 				DatabaseConnection dbc = new DatabaseConnection();
 				MainMenu menu = new MainMenu(dbc);
+				dbc.readEntry();
+				menu.fileWritingMethod();
 				menu.open(localfile);
 				}
 				catch (Exception ea)
