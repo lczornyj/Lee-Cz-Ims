@@ -6,8 +6,9 @@ public class DatabaseConnection {
 	
 	 static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
 	 //static final String DB_URL = "jdbc:mysql://10.50.15.30:3306/mydb";  
-	 static final String DB_URL = "jdbc:mysql://localhost:3306/mydb";  
+	 static final String DB_URL = "jdbc:mysql://10.50.15.30:3306/mydb";  
 	 static final String USER = "LC";  
+	 //static final String PASS = "root";
 	 static final String PASS = "Chutney2000";
 	 static Connection conn = null;
 	 static Statement stmt = null;
@@ -21,7 +22,6 @@ public class DatabaseConnection {
 	 }
 	 
 	 public void openConnection(){
-		 System.out.println("Connecting to database...");
 		 try {
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
 		} catch (SQLException e) {
@@ -33,6 +33,7 @@ public class DatabaseConnection {
 	 public void createEntry(int numberOfProducts, String name, int stockLevel) {
 		 try { 
 		 //System.out.println("Inserting records into the table..."); 
+			 
 		 stmt = conn.createStatement();
 		 String sql = "INSERT INTO imsdatabase (Name, Stock) VALUES ('"+ name + "', " + stockLevel+ ")";
 		 //System.out.println(sql);
@@ -55,6 +56,7 @@ public class DatabaseConnection {
 		 ResultSet rs = stmt.executeQuery(sql2); 
 		 
 		 	while (rs.next()) { 
+		 	
 		 		products.add(new Product(rs.getInt("ID"), rs.getString("Name"),  rs.getInt("Stock")));
 		 		}
 		 	/*for(Product pr : products){

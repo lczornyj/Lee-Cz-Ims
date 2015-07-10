@@ -1,7 +1,6 @@
 	
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  *  This class adds products to an ArrayList
@@ -15,6 +14,7 @@ import java.util.Scanner;
 
 public class AddProduct {
 	DatabaseConnection dbc = new DatabaseConnection();
+	
 	/**
 	 * This method is designed so that a user can add a new item into the list.
 	 * When the user is typing in a name, the name cannot contain any numbers, punctuation or spaces inbetween names.
@@ -25,7 +25,6 @@ public class AddProduct {
 	 */
 
 	public ArrayList<Product> addProduct(ArrayList<Product> products) {	
-		@SuppressWarnings("resource")	
 		String name = products.get(0).getName();//ImsGUI.textField_productName.getText();
 		//duplicates
 		boolean exsistes = false;
@@ -41,6 +40,7 @@ public class AddProduct {
 			
 			products.add(product);
 			dbc.createEntry(numberOfProducts, name, stockLevel);
+			
 		}
 		else {
 			System.out.println("Item already exsists");

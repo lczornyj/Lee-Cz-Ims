@@ -3,6 +3,7 @@
 
 
 
+import java.awt.Desktop;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -10,7 +11,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
-import java.util.Scanner;
 
 /**
  * This is the main menu for the user, it contains all the commands that are accessible to the user in the console.
@@ -18,18 +18,11 @@ import java.util.Scanner;
  *
  */
 public class MainMenu {
-/**
- * The inital declaration of the objects in the main method along with any variables. 
- */
-	private DisplayHelp displayHelp = new DisplayHelp();
-	private AddProduct add = new AddProduct();
-	private SearchForProduct search = new SearchForProduct();
-	private EditProduct edit = new EditProduct();
-	private ArrayList<Product> products = new ArrayList<Product>();
-	private String nameOfFile;
-	private int fileversion = 0;
-	private DatabaseConnection dbc;
-	private String programDirectory = System.getProperty("user.dir");
+private ArrayList<Product> products = new ArrayList<Product>();
+	private static String nameOfFile = "\\desktop\\Stock_Report.txt";
+	private String programDirectory = System.getProperty("user.home");
+	private File file = new File(programDirectory + nameOfFile);
+
 	/**
 	 * The main method which is the central controller of the IMS created.
 	 * This contains all commands used to initialise the programme along with the construction
@@ -50,74 +43,35 @@ public class MainMenu {
 	//}
 	
 	public MainMenu(DatabaseConnection dbc) {
-		this.dbc = dbc;
 		dbc.readEntry();
 		products = DatabaseConnection.getProducts();
-
-
-	
-		File file = new File(programDirectory);
-		displayHelp.displayMenuItems();
-		
-		menuOptions();
 		fileWritingMethod();
 	}
 	
-	/**
-	 * The main menu options. This contains a user input at the start which then activates
-	 * a particular method. This then loops round back to the main menu so that another
-	 * method can be used. If at any point the user types in "End" the loop is broken and the
-	 * main menu is terminated.
-	 */
-	private void menuOptions() {
-		@SuppressWarnings("resource")
-		Scanner in = new Scanner(System.in);
-		String command = in.next();
-		switch (command.toLowerCase()) {
-		case "help": 
-			displayHelp.displayMenuItems();
-			menuOptions();
-			break;
-		case "add": 
-			products = add.addProduct(products);
-			fileWritingMethod();
-			menuOptions();
-			break;
-		case "edit":
-			products = edit.newEdit(products);
-			fileWritingMethod();
-			menuOptions();
-			break;
-		case "search":
-			search.newSearch(products);
-			menuOptions();
-			break;
-		case "Discontinue product":
-			
-			break;
-		case "end": 
-			System.out.println("I want to end");
-			dbc.closeConnection();
-			break;
-			
-		}
-	}
+
 	/**
 	 *  This exports the data from the array list to a text file based on what the
 	 *  user has called the file. At the end of the text file, will be a date when 
 	 *  the list was created.
 	 */
 		
-	private String fileLocation;
+	
+	@SuppressWarnings("deprecation")
 	public void fileWritingMethod() {
 		Calendar rightNow = Calendar.getInstance();
 		try {
-		File file = new File(programDirectory+".txt");
+		
 		DataOutputStream datawriting = new DataOutputStream(new FileOutputStream(file));
 		datawriting.writeUTF("*** STOCK  REPORT *** \r\n\r\n");
-		datawriting.writeUTF("Product   ID   Stock level \r\n");
+		datawriting.writeUTF("ID\t\t\tProduct\t\t\tStock level \r\n");
 		for (int i = 0; i < products.size(); ++i){
-			datawriting.writeUTF(products.get(i).getName() + "     " + products.get(i).getproductid() + "       " + products.get(i).getStock() + "\r\n");
+			if(products.get(i).getName().length() > 15){
+				datawriting.writeUTF(products.get(i).getproductid() + "\t\t\t" + products.get(i).getName() + "\t\t" + products.get(i).getStock() + "\r\n");
+			} else if (products.get(i).getName().length() < 8) {
+			datawriting.writeUTF(products.get(i).getproductid() + "\t\t\t" + products.get(i).getName() + "\t\t\t\t" + products.get(i).getStock() + "\r\n");
+				} else {
+					datawriting.writeUTF(products.get(i).getproductid() + "\t\t\t" + products.get(i).getName()+ "\t\t\t" + products.get(i).getStock() + "\r\n");
+				}
 			}
 		datawriting.writeUTF(rightNow.getTime().toLocaleString());
 		datawriting.close();
@@ -125,7 +79,10 @@ public class MainMenu {
 	catch(IOException e){
 		}
 	}
-	
+	public void open(File document) throws IOException {
+			Desktop dt = Desktop.getDesktop();
+		dt.open(file);
+	}
 	/**
 	 * This is a random number generator to simulate the decrement of the stock
 	 * level. If at any point a products stock level gets below 15, the method

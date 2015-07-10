@@ -8,8 +8,6 @@ public class ims {
 		dbc.getProducts();
 		new ImsGUI();
 		
-		MainMenu mainMenu = new MainMenu(dbc);
-		
 		//dbc.readEntry();
 		//dbc.updateEntry();
 		

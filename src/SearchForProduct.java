@@ -13,9 +13,10 @@ public class SearchForProduct {
 	private String findProductbyName = ImsGUI.textField_findProductByName.getText();
 	
 	
+	
 	private int findProductById;
-	public SearchForProduct()
-	{
+	public SearchForProduct() {
+		
 	}
 	
 	public void ReturnProductNumber(String tempString)
@@ -41,6 +42,7 @@ public class SearchForProduct {
 	public Product newSearch(ArrayList<Product> products) {
 		
 		if(ImsGUI.textField_findProductById != null){
+			System.out.println(products);
 			return idSearch(products);
 		}
 		

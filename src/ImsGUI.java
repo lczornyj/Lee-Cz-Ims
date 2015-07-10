@@ -2,10 +2,9 @@
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.awt.*;
-
+import java.io.File;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 
 
@@ -39,7 +38,7 @@ public class ImsGUI extends JFrame implements ActionListener {
 		frame.setJMenuBar(menu);
 		createMainMenu();
 		frame.setLayout(new GridLayout());
-		frame.setSize(700, 600);
+		frame.setSize(700, 400);
 		frame.setLocation(300, 100);
 		frame.setVisible(true);
 		
@@ -56,7 +55,8 @@ public class ImsGUI extends JFrame implements ActionListener {
 		frame.setContentPane(tempContainer);
 		DatabaseConnection dbc = new DatabaseConnection();
 		dbc.readEntry();
-		
+		MainMenu menu = new MainMenu(dbc);
+		menu.fileWritingMethod();
 		//tableModel = new DefaultTableModel(table, columnNames);
 		for(Product product : DatabaseConnection.getProducts())
 		 {
@@ -68,11 +68,11 @@ public class ImsGUI extends JFrame implements ActionListener {
 	
 	public void createMainMenu () {
 		
-		JMenu file = new JMenu("File");
-		file.setMnemonic(KeyEvent.VK_F);
+		JMenu menufile = new JMenu("File");
+		menufile.setMnemonic(KeyEvent.VK_F);
 		JMenu reports = new JMenu("Reports");
 		reports.setMnemonic(KeyEvent.VK_R);
-		menu.add(file);
+		menu.add(menufile);
 		menu.add(reports);
 		// add menu options for file 
 		JMenuItem addProduct = new JMenuItem("Add new product");
@@ -85,10 +85,10 @@ public class ImsGUI extends JFrame implements ActionListener {
 		
 		editProduct.add(editProductName);
 		editProduct.add(editProductStock);
-		file.add(addProduct);
-		file.add(findProduct);
-		file.add(editProduct);
-		file.add(timeSimulation);
+		menufile.add(addProduct);
+		menufile.add(findProduct);
+		menufile.add(editProduct);
+		menufile.add(timeSimulation);
 		
 		//add buttons
 		//add(addProduct); add(findByName); add(findByID); add(editProductName); add(editProductStock); add(timeSimulation); add(discontinued);
@@ -179,6 +179,8 @@ public class ImsGUI extends JFrame implements ActionListener {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						
+						
 						
 						int dialogButton = JOptionPane.showConfirmDialog (null, "Is this the product?" , "Confirmation",JOptionPane.YES_NO_OPTION);
 		                if (dialogButton == JOptionPane.YES_OPTION){
@@ -358,10 +360,17 @@ public class ImsGUI extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				statusLabel = new JLabel();
-				frame.add(statusLabel);
-					
-				statusLabel.setText("true");
+				try
+				{
+				File localfile = new File("\\desktop\\Stock_Report.txt");
+				DatabaseConnection dbc = new DatabaseConnection();
+				MainMenu menu = new MainMenu(dbc);
+				menu.open(localfile);
+				}
+				catch (Exception ea)
+				{
+					ea.printStackTrace();
+				}
 				
 			}
 		});
@@ -387,3 +396,14 @@ public class ImsGUI extends JFrame implements ActionListener {
 		// TODO Auto-generated method stub		
 	}
 }
+/**
+asd
+asd
+asd
+asd
+asd
+a
+sda
+asd
+asd
+*/
