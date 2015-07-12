@@ -108,7 +108,7 @@ public class ImsGUI extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				addProductWindow = new JFrame();
 				addProductWindow.setLocation(500,300);
 				addProductWindow.setSize(300, 150);
 				addProductWindow.setLayout(new GridLayout(3,2, 5, 5));
@@ -121,12 +121,7 @@ public class ImsGUI extends JFrame implements ActionListener {
 				textField_productStock.getText();
 				JButton addProductButton = new JButton("Add Product");
 				JButton cancelButton = new JButton("cancel");
-				/* input here
-				 * if (!exists)
-				 * 		int dialogButton = JOptionPane.ERROR_MESSAGE;
-		                JOptionPane.showConfirmDialog (null, "Do you want to add Product: ","Confirmation",dialogButton);
-		                
-				 */
+				
 				cancelButton.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -160,19 +155,26 @@ public class ImsGUI extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				Object[] options = {"NAME", "ID!"};
+				int finddialogButton = JOptionPane.showOptionDialog (null, "Search by name or ID?" , "Confirmation",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);	
+				findProductWindow = new JFrame();
+				findProductWindow.setTitle("Search");
 				findProductWindow.setLocation(500,300);
 				findProductWindow.setSize(300, 150);
-				findProductWindow.setLayout(new GridLayout(3,2,5,5));
-				findProductWindow.setTitle("Search");
-				findProductWindow.add(new JLabel("Enter product name: "));
-				findProductWindow.add(textField_findProductByName);				
-				textField_findProductByName.getText();
-				findProductWindow.add(new JLabel("Enter product ID: "));
-				findProductWindow.add(textField_findProductById);				
-				textField_findProductById.getText();
-
+				findProductWindow.setLayout(new GridLayout(2,2,5,5));
 				setPreferredSize( new Dimension( 200, 24 ) );
+				
+				if (finddialogButton == 0){
+					findProductWindow.add(new JLabel("Enter product name: "));
+					findProductWindow.add(textField_findProductByName);				
+					textField_findProductByName.getText();
+				
+				} else if (finddialogButton == 1) {
+					findProductWindow.add(new JLabel("Enter product ID: "));
+					findProductWindow.add(textField_findProductById);				
+					textField_findProductById.getText();				
+				}
+
 				JButton findProductButton = new JButton("Find product");
 				JButton cancelButton = new JButton("Cancel");
 				
@@ -188,15 +190,23 @@ public class ImsGUI extends JFrame implements ActionListener {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						
-						
-						
-						int dialogButton = JOptionPane.showConfirmDialog (null, "Is this the product?" , "Confirmation",JOptionPane.YES_NO_OPTION);
-		                if (dialogButton == JOptionPane.YES_OPTION){
-		                	
-		                	findProductWindow.dispose();
-		                }
+	                	findProductWindow.dispose();
+	                	Product tempProduct = null;
+	                	SearchForProduct sfp = new SearchForProduct();
+	                	ArrayList<Product> alp = DatabaseConnection.getProducts();//new ArrayList<Product>();
+                		
+	                	if (finddialogButton ==0){
+	                		//name search
+	                		tempProduct = sfp.newSearch(alp,false);
+	                	} else {
+	                		// ID search
+	                		tempProduct = sfp.newSearch(alp,true);
+	                	}
+		                	int confirmButton = JOptionPane.showConfirmDialog (null, "Is this the product?  " + tempProduct.getName(), "Confirmation",JOptionPane.YES_NO_OPTION);
 		                
+	                	//int confirmButton = JOptionPane.showConfirmDialog(null, "Product: " + tempProduct.getName());
+	                	if (confirmButton == JOptionPane.YES_OPTION){
+		                }
 					}
 				});
 				
@@ -206,7 +216,7 @@ public class ImsGUI extends JFrame implements ActionListener {
 				
 			}
 		});
-
+		
 		editProductName.addActionListener(new ActionListener() {
 			
 			@Override
@@ -408,14 +418,3 @@ public class ImsGUI extends JFrame implements ActionListener {
 		// TODO Auto-generated method stub		
 	}
 }
-/**
-asd
-asd
-asd
-asd
-asd
-a
-sda
-asd
-asd
-*/

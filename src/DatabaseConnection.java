@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class DatabaseConnection {
 	
 	 static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
+	 static final String DB_URL = "jdbc:mysql://Localhost:3306/mydb";  
 	 //static final String DB_URL = "jdbc:mysql://10.50.15.30:3306/mydb";  
-	 static final String DB_URL = "jdbc:mysql://10.50.15.30:3306/mydb";  
 	 static final String USER = "LC";  
 	 //static final String PASS = "root";
 	 static final String PASS = "Chutney2000";
@@ -45,7 +45,7 @@ public class DatabaseConnection {
 		}
 	 }
 	 
-	 public void readEntry () {
+	 public static void readEntry () {
 		 System.out.println("Creating statement...");
 		 try {
 			stmt = conn.createStatement();
@@ -53,7 +53,8 @@ public class DatabaseConnection {
 			// TODO Auto-generated catch block
 			
 		 String sql2 = "SELECT * FROM imsdatabase";
-		 ResultSet rs = stmt.executeQuery(sql2); 
+		 	products.clear();
+		 	ResultSet rs = stmt.executeQuery(sql2); 
 		 
 		 	while (rs.next()) { 
 		 	
@@ -113,6 +114,7 @@ public class DatabaseConnection {
 	}
 	 
 	 public static ArrayList<Product> getProducts(){
+		 readEntry();
 		 return products;
 	 }
 	 

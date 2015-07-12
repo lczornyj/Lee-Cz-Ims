@@ -10,21 +10,41 @@ import java.util.ArrayList;
 
 public class SearchForProduct {
 	DatabaseConnection dbc = new DatabaseConnection();
-	private String findProductbyName = ImsGUI.textField_findProductByName.getText();
+	private String findProductbyName;// = ImsGUI.textField_findProductByName.getText();
 	
 	
 	
-	private int findProductById;
+	private int findProductById;// = Integer.parseInt(ImsGUI.textField_findProductById.getText());
 	public SearchForProduct() {
+	
+		try
+		{
+			findProductbyName = ImsGUI.textField_findProductByName.getText();
+				
+		}
+		catch (Exception e)
+		{
+			System.out.println("ERROR 1");
+
+		}
+		try
+		{
+			findProductById = Integer.parseInt(ImsGUI.textField_findProductById.getText());	
+		}
+		catch (Exception e)
+		{
+			System.out.println("ERROR 2");
+		}
+		
 		
 	}
 	
-	public void ReturnProductNumber(String tempString)
+	/*public void ReturnProductNumber(String tempString)
 	{
 		try
 		{
 			if(tempString != "")
-			{
+			{	
 				findProductById = Integer.parseInt(tempString);
 			}
 		}
@@ -32,7 +52,7 @@ public class SearchForProduct {
 		{
 			System.out.println(e.getMessage());
 		}
-	}
+	}*/
 	/**
 	 * newSearch is designed for the user to decide by which attribute they want to search for.
 	 * @param products
@@ -42,11 +62,23 @@ public class SearchForProduct {
 	public Product newSearch(ArrayList<Product> products) {
 		
 		if(ImsGUI.textField_findProductById != null){
-			System.out.println(products);
+		//	System.out.println(products);
 			return idSearch(products);
 		}
 		
 		return nameSearch(products);
+	}
+	
+	public Product newSearch(ArrayList<Product> products, boolean byID)
+	{
+		if(byID == true)
+		{
+			return idSearch(products);
+		}
+		else
+		{
+			return nameSearch(products);
+		}
 	}
 	/**
 	 *  nameSearch is setup so that a user can find a product specifically by its name.
@@ -56,7 +88,7 @@ public class SearchForProduct {
 	 */
 	private Product nameSearch(ArrayList<Product> products) {
 		
-		String name = findProductbyName;
+			String name = findProductbyName;
 		
 			for(Product p : products) {
 
