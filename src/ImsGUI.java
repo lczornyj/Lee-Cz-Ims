@@ -155,7 +155,7 @@ public class ImsGUI extends JFrame implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				Object[] options = {"NAME", "ID!"};
+				Object[] options = {"NAME", "ID"};
 				final int finddialogButton = JOptionPane.showOptionDialog (null, "Search by name or ID?" , "Confirmation",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);	
 				findProductWindow = new JFrame();
 				findProductWindow.setTitle("Search");
@@ -190,7 +190,6 @@ public class ImsGUI extends JFrame implements ActionListener {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-	                	findProductWindow.dispose();
 	                	Product tempProduct = null;
 	                	SearchForProduct sfp = new SearchForProduct();
 	                	ArrayList<Product> alp = DatabaseConnection.getProducts();//new ArrayList<Product>();
@@ -206,6 +205,8 @@ public class ImsGUI extends JFrame implements ActionListener {
 		                
 	                	//int confirmButton = JOptionPane.showConfirmDialog(null, "Product: " + tempProduct.getName());
 	                	if (confirmButton == JOptionPane.YES_OPTION){
+		                	findProductWindow.dispose();
+
 		                }
 					}
 				});
@@ -358,9 +359,9 @@ public class ImsGUI extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				int dialogButton = JOptionPane.showConfirmDialog (null, "Do you want to run simulation? ","Confirmation",JOptionPane.YES_NO_OPTION);
 	               if (dialogButton == JOptionPane.YES_OPTION){
-	            	  /* DatabaseConnection dbc = new DatabaseConnection();
+	            	  DatabaseConnection dbc = new DatabaseConnection();
 	            	   MainMenu menu = new MainMenu(dbc);
-	            	   menu.calculations(numberGenerator);*/
+	            	   menu.calculations(menu.numberGenerator());
 	                }
 				
 				

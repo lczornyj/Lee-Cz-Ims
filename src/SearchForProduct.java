@@ -24,7 +24,7 @@ public class SearchForProduct {
 		}
 		catch (Exception e)
 		{
-			System.out.println("ERROR 1");
+			//System.out.println("ERROR 1");
 
 		}
 		try
@@ -33,7 +33,7 @@ public class SearchForProduct {
 		}
 		catch (Exception e)
 		{
-			System.out.println("ERROR 2");
+			//System.out.println("ERROR 2");
 		}
 		
 		
@@ -93,7 +93,7 @@ public class SearchForProduct {
 			for(Product p : products) {
 
 				if (p.getName().equalsIgnoreCase(name)) {
-					System.out.println("ID:"+ p.getproductid() + ", Name: " + p.getName() + ",Stock Level: " + p.getStock());
+					//System.out.println("ID:"+ p.getproductid() + ", Name: " + p.getName() + ",Stock Level: " + p.getStock());
 					return p;
 				}
 			}
@@ -109,7 +109,7 @@ public class SearchForProduct {
 			int id = findProductById;
 			for(Product p : products) {
 				if (p.getproductid() == id){
-					System.out.println("ID: " +p.getproductid()+ ", Name: " + p.getName() + ", Stock level " + p.getStock());
+					//System.out.println("ID: " +p.getproductid()+ ", Name: " + p.getName() + ", Stock level " + p.getStock());
 					
 					
 					return p;		
