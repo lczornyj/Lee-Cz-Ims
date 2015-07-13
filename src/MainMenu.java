@@ -124,7 +124,7 @@ private ArrayList<Product> products = new ArrayList<Product>();
 		for (int i = 0; i<100; ++i){
 			try {
 				numberGenerator();
-				Thread.sleep(5000);
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
