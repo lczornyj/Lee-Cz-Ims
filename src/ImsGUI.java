@@ -131,7 +131,7 @@ public class ImsGUI extends JFrame implements ActionListener {
 				addProductButton.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						int dialogButton = JOptionPane.showConfirmDialog (null, "Do you want to add Product: " + textField_productName.getText(),"Confirmation",JOptionPane.YES_NO_OPTION);
+						int dialogButton = JOptionPane.showConfirmDialog (null, "Do you want to add Product: " + textField_productName.getText() + " with stock level: " +textField_productStock.getText(),"Confirmation",JOptionPane.YES_NO_OPTION);
 		               if (dialogButton == JOptionPane.YES_OPTION){
 		            	   	AddProduct ap = new AddProduct();
 		            	   	ArrayList<Product> alp = new ArrayList<Product>();
@@ -202,7 +202,7 @@ public class ImsGUI extends JFrame implements ActionListener {
 	                		// ID search
 	                		tempProduct = sfp.newSearch(alp,true);
 	                	}
-		                	int confirmButton = JOptionPane.showConfirmDialog (null, "Is this the product?  " + tempProduct.getName(), "Confirmation",JOptionPane.YES_NO_OPTION);
+		                	int confirmButton = JOptionPane.showConfirmDialog (null, "Is this the product? ID: " + tempProduct.getproductid() + "   Name: " + tempProduct.getName() + "   Stock Level: " + tempProduct.getStock(), "Confirmation",JOptionPane.YES_NO_OPTION);
 		                
 	                	//int confirmButton = JOptionPane.showConfirmDialog(null, "Product: " + tempProduct.getName());
 	                	if (confirmButton == JOptionPane.YES_OPTION){
