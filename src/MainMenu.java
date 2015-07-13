@@ -108,11 +108,11 @@ private ArrayList<Product> products = new ArrayList<Product>();
 				
 				int threshold = products.get(stocknumber).getStock();
 				if (threshold >= 25 && threshold <50){
-					System.out.println("product: " + products.get(stocknumber).getName() + " is low, reorder stock");
+					System.out.println("product: " + products.get(stocknumber).getName() + ",  Stock Level:" + products.get(stocknumber).getStock()   +", Status: Low Stock ");
 				} else if (threshold > 0 && threshold <25) {
-					System.out.println("product: " + products.get(stocknumber).getName() + " is critical, reorder stock now");
+					System.out.println("product: " + products.get(stocknumber).getName() + ",  Stock level " + products.get(stocknumber).getStock()   +", Status: Critial Level");
 				}  else if (threshold ==0) {
-					System.out.println("product: " + products.get(stocknumber).getName() + " is out of stock, urgent attention required");	
+					System.out.println("product: " + products.get(stocknumber).getName() + ",  Stock level " + products.get(stocknumber).getStock()   +", Status: Out of Stock");	
 				}
 			}
 		
