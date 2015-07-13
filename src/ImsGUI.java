@@ -25,7 +25,7 @@ public class ImsGUI extends JFrame implements ActionListener {
 	JFrame editStockWindow = new JFrame();
 	JFrame newNameWindow = new JFrame();
 	JFrame newStockWindow = new JFrame();
-
+	
 
 	
 	public ImsGUI () {
