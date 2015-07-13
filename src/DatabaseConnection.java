@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class DatabaseConnection {
 	
 	 static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	 static final String DB_URL = "jdbc:mysql://Localhost:3306/mydb";  
-	 //static final String DB_URL = "jdbc:mysql://10.50.15.30:3306/mydb";  
+	 //static final String DB_URL = "jdbc:mysql://Localhost:3306/mydb";  
+	 static final String DB_URL = "jdbc:mysql://10.50.15.30:3306/mydb";  
 	 static final String USER = "LC";  
 	 //static final String PASS = "root";
 	 static final String PASS = "Chutney2000";

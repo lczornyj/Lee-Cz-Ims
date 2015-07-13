@@ -156,7 +156,7 @@ public class ImsGUI extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				Object[] options = {"NAME", "ID!"};
-				int finddialogButton = JOptionPane.showOptionDialog (null, "Search by name or ID?" , "Confirmation",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);	
+				final int finddialogButton = JOptionPane.showOptionDialog (null, "Search by name or ID?" , "Confirmation",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);	
 				findProductWindow = new JFrame();
 				findProductWindow.setTitle("Search");
 				findProductWindow.setLocation(500,300);
