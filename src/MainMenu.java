@@ -18,7 +18,7 @@ import java.util.Random;
  *
  */
 public class MainMenu {
-private ArrayList<Product> products = new ArrayList<Product>();
+	private ArrayList<Product> products = new ArrayList<Product>();
 	private static String nameOfFile = "\\desktop\\Stock_Report.txt";
 	private String programDirectory = System.getProperty("user.home");
 	private File file = new File(programDirectory + nameOfFile);
@@ -29,18 +29,6 @@ private ArrayList<Product> products = new ArrayList<Product>();
 	 * of the IMS.
 	 * The main menu with the various commands are then accessed through the menuOptions method.
 	 */
-	
-	//public void runthread() {
-	//	System.out.println("Do you wish to simulate sales? ");
-	//	Scanner in = new Scanner(System.in);
-	//	String yes = in.next();
-	//	if (yes.equalsIgnoreCase("yes")){
-	//	calculations(numberGenerator());
-	//	}
-	//	else {
-	//
-	//	}
-	//}
 	
 	public MainMenu(DatabaseConnection dbc) {
 		dbc.readEntry();
@@ -78,6 +66,12 @@ private ArrayList<Product> products = new ArrayList<Product>();
 	catch(IOException e){
 		}
 	}
+	/**
+	 * This method will launch a text file that is on the users desktop
+	 * where dt.open(file) is the file name that will be opened.
+	 * @param document
+	 * @throws IOException
+	 */
 	public void open(File document) throws IOException {
 			Desktop dt = Desktop.getDesktop();
 		dt.open(file);
@@ -90,11 +84,9 @@ private ArrayList<Product> products = new ArrayList<Product>();
 	public int numberGenerator (){
 		Random generator = new Random();
 		int randomDecrease = generator.nextInt(5)+1;
-		// select random product based of random integer selected and take product id from that number
 		int maxvalue = products.size();
 		Random stockgenerator = new Random();
 		if (maxvalue > 0){
-			//System.out.println("test1");
 			int stocknumber = stockgenerator.nextInt(maxvalue);
 			int adjustments = products.get(stocknumber).getStock();
 			int testLimits = adjustments - randomDecrease;
@@ -106,6 +98,11 @@ private ArrayList<Product> products = new ArrayList<Product>();
 					}
 				products.get(stocknumber).setStock(adjustments);
 				
+				/**
+				 * The if statement loops through every product and any product that is between
+				 * the pre-set amounts will be printed out with a warning dependant on their
+				 * current stock level.
+				 */
 				int threshold = products.get(stocknumber).getStock();
 				if (threshold >= 25 && threshold <50){
 					System.out.println("product: " + products.get(stocknumber).getName() + ",  Stock Level:" + products.get(stocknumber).getStock()   +", Status: Low Stock ");
@@ -119,21 +116,24 @@ private ArrayList<Product> products = new ArrayList<Product>();
 		
 		return 1;
 	}
-	// work in progress for decrement along side the main method.
+	/**
+	 * This method calls in the random number generator method and simulates the act of sales.
+	 * The Thread.sleep() method pauses the programme for a period of milliseconds dependant on
+	 * what number is input into the programme.
+	 * @param numberGenerator
+	 */
 	public void calculations(int numberGenerator) {
 		for (int i = 0; i<100; ++i){
 			try {
 				numberGenerator();
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}		
 		}
 	}
 			public void run() {
 			calculations(numberGenerator());
-			//Runnable;
 		}
 	
 }

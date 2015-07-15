@@ -21,8 +21,8 @@ public class ImsGUI extends JFrame implements ActionListener {
 	static String[][] table = new String[0][3];
 	JFrame addProductWindow = new JFrame();
 	JFrame findProductWindow = new JFrame();
-	JFrame editNameWindow = new JFrame();
-	JFrame editStockWindow = new JFrame();
+	//JFrame editNameWindow = new JFrame();
+	//JFrame editStockWindow = new JFrame();
 	JFrame newNameWindow = new JFrame();
 	JFrame newStockWindow = new JFrame();
 	
@@ -64,8 +64,6 @@ public class ImsGUI extends JFrame implements ActionListener {
 		DatabaseConnection dbc = new DatabaseConnection();
 		dbc.readEntry();
 		
-		//tableModel = new DefaultTableModel(table, columnNames);
-		
 		for(Product product : DatabaseConnection.getProducts())
 		 {
 			tableModel.addRow(product.ObjectArray()); 
@@ -87,16 +85,16 @@ public class ImsGUI extends JFrame implements ActionListener {
 		JMenuItem addProduct = new JMenuItem("Add new product");
 		JMenuItem findProduct = new JMenuItem("Search for a product");
 		
-		JMenu editProduct = new JMenu("Edit an existing product");
-		JMenuItem editProductName = new JMenuItem("Edit product name");
-		JMenuItem editProductStock = new JMenuItem("Edit product stock level");
+		//JMenu editProduct = new JMenu("Edit an existing product");
+		//JMenuItem editProductName = new JMenuItem("Edit product name");
+		//JMenuItem editProductStock = new JMenuItem("Edit product stock level");
 		JMenuItem timeSimulation = new JMenuItem("Simulate sales");
 		
-		editProduct.add(editProductName);
-		editProduct.add(editProductStock);
+		//editProduct.add(editProductName);
+		//editProduct.add(editProductStock);
 		menufile.add(addProduct);
 		menufile.add(findProduct);
-		menufile.add(editProduct);
+		//menufile.add(editProduct);
 		menufile.add(timeSimulation);
 		
 		//add buttons
@@ -201,9 +199,7 @@ public class ImsGUI extends JFrame implements ActionListener {
 	                		// ID search
 	                		tempProduct = sfp.newSearch(alp,true);
 	                	}
-		                	int confirmButton = JOptionPane.showConfirmDialog (null, "Is this the product? ID: " + tempProduct.getproductid() + "   Name: " + tempProduct.getName() + "   Stock Level: " + tempProduct.getStock(), "Confirmation",JOptionPane.YES_NO_OPTION);
-		                
-	                	//int confirmButton = JOptionPane.showConfirmDialog(null, "Product: " + tempProduct.getName());
+	                	int confirmButton = JOptionPane.showConfirmDialog (null, "Is this the product? ID: " + tempProduct.getproductid() + "   Name: " + tempProduct.getName() + "   Stock Level: " + tempProduct.getStock(), "Confirmation",JOptionPane.YES_NO_OPTION);
 	                	if (confirmButton == JOptionPane.YES_OPTION){
 		                	findProductWindow.dispose();
 
@@ -218,7 +214,7 @@ public class ImsGUI extends JFrame implements ActionListener {
 			}
 		});
 		
-		editProductName.addActionListener(new ActionListener() {
+		/*editProductName.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -352,7 +348,7 @@ public class ImsGUI extends JFrame implements ActionListener {
 				editStockWindow.setVisible(true);
 			
 			}
-		});
+		}); */
 		timeSimulation.addActionListener(new ActionListener() {
 			
 			@Override
@@ -372,9 +368,9 @@ public class ImsGUI extends JFrame implements ActionListener {
 		
 		// add menu options for reports
 		JMenuItem showStockReport = new JMenuItem("Show stock report");
-		JMenuItem showPurchaseOrder = new JMenuItem("Show purchase order");
+		//JMenuItem showPurchaseOrder = new JMenuItem("Show purchase order");
 		reports.add(showStockReport);
-		reports.add(showPurchaseOrder);
+		//reports.add(showPurchaseOrder);
 		
 		//create actionlisteners for reports
 		showStockReport.addActionListener(new ActionListener() {
@@ -397,7 +393,7 @@ public class ImsGUI extends JFrame implements ActionListener {
 				
 			}
 		});
-		showPurchaseOrder.addActionListener(new ActionListener() {
+		/*showPurchaseOrder.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -408,7 +404,7 @@ public class ImsGUI extends JFrame implements ActionListener {
 				statusLabel.setText("story");
 				
 			}
-		});	
+		});	*/
 	}
 	public void paint(Graphics g) {
 		super.paint(g);
